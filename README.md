@@ -13,7 +13,7 @@
   <img align="left" alt="Ajay's Github" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/codersrank.svg" />
 </a>
 <br />
-<img align="right" alt="GIF" width=380 src="https://i.imgur.com/eH6bpZb.gif" />
+<img align="right" alt="GIF" width=380 src="https://i.imgur.com/SfFoYBL.gif" />
 
 ### <samp>I'm João Carvalho</samp>
 - <samp>Full-stack developer from Brazil 🇧🇷.</samp>
