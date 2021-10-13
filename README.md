@@ -18,4 +18,4 @@
 ### <samp>I'm João Carvalho</samp>
 - <samp>Full-stack developer from Brazil 🇧🇷.</samp>
 - <samp>Software Engineering MBA student</samp>. 
-- <samp>Currently working on one of the biggest publishing company of the World</samp>.
+- <samp>Currently working at Wikimedia Foundation</samp>.
