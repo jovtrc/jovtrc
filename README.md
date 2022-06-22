@@ -9,16 +9,16 @@ class About extends Me
         return [
             'name'     => 'João Carvalho',
             'position' => 'Senior Software Engineer',
-            'location' => 'São Paulo, Brazil 🇧🇷';
-            'website'  => 'https://joaocarvalho.cc';
+            'location' => 'São Paulo, Brazil 🇧🇷',
+            'website'  => 'https://joaocarvalho.cc'
         ];
     }
     public function getSkills(): array
     {
         return [
             'languages'  => ['JavaScript', 'PHP'],
-            'frameworks' => ['React', 'React Native', 'Laravel', 'WordPress'];
-            'databases'  => ['MySQL', 'PostgreSQL', 'Fauna'];
+            'frameworks' => ['React', 'React Native', 'Laravel', 'WordPress'],
+            'databases'  => ['MySQL', 'PostgreSQL', 'Fauna']
         ];
     }
 }
