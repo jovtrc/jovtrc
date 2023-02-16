@@ -26,4 +26,4 @@ class About extends Me
 
 ---
 
-You can reach me via [Linkedin](https://www.linkedin.com/in/jovtrc/) and follow me at @superdev.64 on [Instagram](https://www.instagram.com/superdev.64) and [YouTube](https://www.youtube.com/channel/UCdbYHaGypUZNFkXL6APF92Q)
+You can reach me via [Linkedin](https://www.linkedin.com/in/jovtrc/) and follow me at @jovtrc on [Instagram](https://www.instagram.com/jovtrc)
