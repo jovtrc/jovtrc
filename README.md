@@ -26,4 +26,4 @@ class About extends Me
 
 ---
 
-You can reach me via [Linkedin](https://www.linkedin.com/in/jovtrc/) and follow me at @jovtrc on [Instagram](https://www.instagram.com/jovtrc)
+You can reach me via [Linkedin](https://www.linkedin.com/in/jovtrc/) and follow me at @joaocarvalho.cc on [Instagram](https://www.instagram.com/joaocarvalho.cc)
