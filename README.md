@@ -10,7 +10,7 @@ class About extends Me
             'name'     => 'João Carvalho',
             'position' => 'Senior Software Engineer',
             'location' => 'São Paulo, Brazil 🇧🇷',
-            'website'  => 'https://joaocarvalho.cc'
+            'website'  => 'https://joaoc.dev'
         ];
     }
     public function getSkills(): array
