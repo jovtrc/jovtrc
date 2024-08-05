@@ -47,12 +47,12 @@ export default function Home() {
               </Link>
             </li>
             <li>
-              <Link href="https://github.com/jovtrc/">
+              <Link href="https://www.linkedin.com/in/jovtrc/">
                 <LinkedInLogoIcon width="32" height="32" />
               </Link>
             </li>
             <li>
-              <Link href="https://github.com/jovtrc/">
+              <Link href="https://www.instagram.com/joaocarvalho.cc/">
                 <InstagramLogoIcon width="32" height="32" />
               </Link>
             </li>
