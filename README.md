@@ -8,7 +8,7 @@ class About extends Me
     {
         return [
             'name'     => 'João Carvalho',
-            'position' => 'Senior Software Engineer',
+            'position' => 'Software Architect',
             'location' => 'São Paulo, Brazil 🇧🇷',
             'website'  => 'https://joaoc.dev'
         ];
@@ -16,9 +16,9 @@ class About extends Me
     public function getSkills(): array
     {
         return [
-            'languages'  => ['JavaScript', 'PHP'],
-            'frameworks' => ['React', 'React Native', 'Laravel', 'WordPress'],
-            'databases'  => ['MySQL', 'PostgreSQL', 'Fauna']
+            'languages'  => ['JavaScript/TypeScript', 'PHP'],
+            'frameworks' => ['React', 'React Native', 'Laravel', 'WordPress', 'Nest.js', 'Next.js'],
+            'databases'  => ['MySQL', 'PostgreSQL', 'Firestore']
         ];
     }
 }
