@@ -7,12 +7,13 @@
  * @package Carvalho
  */
 
-$carvalho_photo = get_theme_file_uri('assets/images/talk-placeholder.svg');
 $carvalho_talks = array(
     array(
         'title' => __('The myths and truths about headless WordPress', 'carvalho'),
         'event' => __('WordCamp Brasil, 2025', 'carvalho'),
         'about' => __('What CNN Brasil gained and what it faced when it moved its news site to headless. When to migrate and when not to.', 'carvalho'),
+        'photo' => 'wordcamp-brasil-2025.jpg',
+        'alt' => __('João Carvalho on stage at WordCamp Brasil 2025, next to a slide about the tech stack', 'carvalho'),
         'video' => 'https://www.youtube.com/watch?v=nVHpRDY_9qE',
         'recap' => home_url('/blog/mitos-e-verdades-resumo-da-minha-palestra-sobre-wordpress-headless/'),
     ),
@@ -20,6 +21,8 @@ $carvalho_talks = array(
         'title' => __('Breaking News: CNN’s Rise to Industry Leader in Brazil', 'carvalho'),
         'event' => __('WordCamp US, 2024, with Brian Alvey', 'carvalho'),
         'about' => __('The architecture and team culture decisions that made CNN Brasil one of the three largest news sites in Brazil.', 'carvalho'),
+        'photo' => 'wordcamp-us-2024.jpg',
+        'alt' => __('João Carvalho on stage at WordCamp US 2024, in Portland', 'carvalho'),
         'video' => 'https://www.youtube.com/live/EL9x9aw54as?t=11475s',
         'recap' => home_url('/blog/cnn-brasil-no-wordcamp-us-2024/'),
     ),
@@ -37,7 +40,7 @@ $carvalho_talks = array(
 <div class="wp-block-column"><!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|40","left":"var:preset|spacing|40"}}}} -->
 <div class="wp-block-columns"><?php foreach ($carvalho_talks as $carvalho_talk) : ?><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:image {"aspectRatio":"16/9","scale":"cover","sizeSlug":"full","linkDestination":"none"} -->
-<figure class="wp-block-image size-full"><img src="<?php echo esc_url($carvalho_photo); ?>" alt="" style="aspect-ratio:16/9;object-fit:cover"/></figure>
+<figure class="wp-block-image size-full"><img src="<?php echo esc_url(get_theme_file_uri('assets/images/talks/' . $carvalho_talk['photo'])); ?>" alt="<?php echo esc_attr($carvalho_talk['alt']); ?>" width="1280" height="720" loading="lazy" style="aspect-ratio:16/9;object-fit:cover"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:heading {"level":3} -->
