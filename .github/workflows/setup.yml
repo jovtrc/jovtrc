@@ -26,15 +26,15 @@ on:
     paths:
       - .github/workflows/setup.yml
 
-# Mesmo group do deploy → setup e deploy nunca rodam ao mesmo tempo.
-concurrency:
-  group: deploy-${{ github.ref }}
-  cancel-in-progress: false
-
 jobs:
   setup:
     name: Setup (wp eval-file)
     if: github.event_name == 'workflow_dispatch'
+    # No job (e não no workflow) para que o push que só registra o workflow,
+    # com o job pulado, não entre no grupo e não cancele um deploy na fila.
+    concurrency:
+      group: deploy-${{ github.ref }}
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     environment: production
     steps:
