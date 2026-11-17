@@ -8,11 +8,14 @@
 
 /**
  * Devolve o ID do conteúdo com o slug informado e o cria se ainda não existir.
+ * Se já existir, atualiza os campos informados, menos o conteúdo, que pode ter sido editado no painel.
  */
 function carvalho_setup_content(string $type, string $slug, array $fields): int
 {
     $existing = get_page_by_path($slug, OBJECT, $type);
     if ($existing) {
+        $changes = array_diff_key($fields, array('post_content' => true));
+        wp_update_post(array_merge($changes, array('ID' => $existing->ID)));
         return $existing->ID;
     }
 
@@ -36,6 +39,28 @@ function carvalho_setup_deactivate_replaced_plugins(): void
         fn(string $plugin): bool => str_contains(dirname($plugin), '.pre-symlink.')
     );
     deactivate_plugins($replaced);
+}
+
+/**
+ * Troca o slug de um post e atualiza os links internos que apontam para ele.
+ * O WordPress guarda o slug antigo e redireciona o endereço antigo para o novo.
+ */
+function carvalho_setup_rename_post(string $old_slug, string $new_slug): void
+{
+    global $wpdb;
+
+    $post = get_page_by_path($old_slug, OBJECT, 'post');
+    if (! $post) {
+        return;
+    }
+
+    wp_update_post(array('ID' => $post->ID, 'post_name' => $new_slug));
+    $wpdb->query($wpdb->prepare(
+        "UPDATE {$wpdb->posts} SET post_content = REPLACE(post_content, %s, %s)",
+        "/blog/{$old_slug}/",
+        "/blog/{$new_slug}/"
+    ));
+    wp_cache_flush();
 }
 
 /**
@@ -66,17 +91,23 @@ update_option('show_on_front', 'page');
 update_option('page_on_front', $carvalho_front);
 update_option('page_for_posts', $carvalho_blog);
 
+carvalho_setup_rename_post(
+    'myths-and-truths-a-recap-of-my-talk-on-headless-wordpress',
+    'mitos-e-verdades-resumo-da-minha-palestra-sobre-wordpress-headless'
+);
+
 $carvalho_posts = array(
-    'myths-and-truths-a-recap-of-my-talk-on-headless-wordpress' => array(
+    'mitos-e-verdades-resumo-da-minha-palestra-sobre-wordpress-headless' => array(
         'post_title' => 'Mitos e verdades: resumo da minha palestra sobre WordPress headless',
         'post_date' => '2025-11-29 17:45:00',
     ),
     'cnn-brasil-no-wordcamp-us-2024' => array(
         'post_title' => 'A CNN Brasil no WordCamp US 2024: resumo da palestra',
-        'post_date' => '2026-11-16 09:00:00',
+        'post_date' => '2024-09-20 09:00:00',
     ),
 );
 foreach ($carvalho_posts as $carvalho_slug => $carvalho_fields) {
+    $carvalho_fields['post_date_gmt'] = get_gmt_from_date($carvalho_fields['post_date']);
     $carvalho_fields['post_content'] = wp_slash(file_get_contents(__DIR__ . "/posts/{$carvalho_slug}.html"));
     carvalho_setup_content('post', $carvalho_slug, $carvalho_fields);
 }

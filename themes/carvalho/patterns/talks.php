@@ -14,7 +14,7 @@ $carvalho_talks = array(
         'event' => __('WordCamp Brasil, 2025', 'carvalho'),
         'about' => __('What CNN Brasil gained and what it faced when it moved its news site to headless. When to migrate and when not to.', 'carvalho'),
         'video' => 'https://www.youtube.com/watch?v=nVHpRDY_9qE',
-        'recap' => home_url('/blog/myths-and-truths-a-recap-of-my-talk-on-headless-wordpress/'),
+        'recap' => home_url('/blog/mitos-e-verdades-resumo-da-minha-palestra-sobre-wordpress-headless/'),
     ),
     array(
         'title' => __('Breaking News: CNN’s Rise to Industry Leader in Brazil', 'carvalho'),
