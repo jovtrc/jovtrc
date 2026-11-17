@@ -1,0 +1,219 @@
+<!-- wp:paragraph -->
+<p>Em 29 de novembro de 2025, falei no WordCamp Brasil sobre a migração do portal da CNN Brasil para WordPress headless. Na época, eu era coordenador de desenvolvimento de software na CNN. Este texto resume a palestra. O <a href="https://www.youtube.com/watch?v=nVHpRDY_9qE">vídeo completo</a> está no YouTube.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">O que é headless</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>O WordPress tradicional é um restaurante comum: tem cozinha, salão e garçons. Funciona bem, mas complica quando a operação precisa servir os pratos fora do salão, com entrega própria ou por aplicativos.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>O headless é uma dark kitchen, um restaurante que só tem cozinha. Os pratos saem por qualquer canal, e a mesma cozinha pode atender marcas diferentes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>No WordPress, isso significa separar o painel de administração da exibição. O mesmo conteúdo vai para o site, para o aplicativo e para a TV. O CNN Money é um canal de TV gerenciado pelo WordPress: as notícias, os anúncios e as cotações que aparecem na tela vêm de lá.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>O WordPress deixa de ser uma ferramenta de criar sites e volta a ser o que sempre foi: um sistema de gestão de conteúdo.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">O que dificulta</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Encontramos vários problemas na migração. Estes são os quatro principais.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>A documentação é escassa.</strong> Há muito material sobre como instalar e integrar, inclusive em português. Sobre o que fazer depois da integração, quase nada.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>A maioria dos plugins deixa de funcionar.</strong> Um plugin de formulário cria o formulário no admin e o exibe no front-end. Se o WordPress não controla mais o front-end, o plugin não tem onde exibir. Além disso, a maioria dos plugins não tem API, e é por API, REST ou GraphQL, que o front-end conversa com o WordPress. Na CNN, vários plugins foram reescritos, adaptados ou descartados. Como a CNN já usava poucos plugins de terceiros, o impacto foi pequeno.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>É preciso reinventar a roda.</strong> Pré-visualização, regras de reescrita e links permanentes fazem parte do core. Sem o front-end do WordPress, é a sua aplicação que precisa saber se um endereço é uma listagem, uma página ou uma matéria. A pré-visualização é o caso mais difícil. Ela depende da sessão de quem está logado no WordPress, e essa pessoa não está logada no front-end. Se a pré-visualização fica aberta, vira falha de segurança. Se não funciona, a redação para de usar.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Controlar o cache dá trabalho.</strong> A CNN tem quatro camadas de cache: são duas aplicações, WordPress e front-end, cada uma com cache na CDN e cache em memória. A limpeza precisa seguir uma ordem. Se o front-end for limpo antes do back-end, ele busca de novo a informação antiga.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">O que se ganha</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Chamo os ganhos de liberdades.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Velocidade.</strong> O desempenho já começa melhor, sem otimizações extremas. E não só para o leitor. Quem acessa o site não acessa mais o WordPress, então o admin fica mais rápido para a redação.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Distribuição.</strong> O modelo obriga a criar um padrão de entrega do conteúdo, seja uma API bem formatada, seja um GraphQL bem documentado. A estrutura que atende o site atende também um aplicativo, a TV ou um parceiro. O WordPress vira um hub de conteúdo.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Talento.</strong> Na CNN, era difícil contratar gente de WordPress e fácil contratar gente de Node e Next. O WordPress da CNN não é um gestor de site. É tratado como um framework, e o portal como uma aplicação. Foi mais fácil contratar quem já pensava em aplicações e ensinar WordPress do que o contrário.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Tranquilidade.</strong> Sem a carga do leitor no back-end e no banco de dados, a chance de o site cair em um ataque DDoS é menor. O admin pode ficar em outro domínio, em um servidor interno ou restrito a IPs específicos.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A CNN Brasil em números</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Um multisite com cerca de 10 sites.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>15 tipos de post e 3 milhões de posts.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Mais de 100 editores e redatores, 24 horas por dia.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Mais de 5.000 matérias por mês.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Um banco de dados de cerca de 150 GB.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A migração</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Até 2024, a CNN usava o modelo acoplado. O headless entrou em produção no fim de maio de 2025.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Pouco mais de um ano de projeto, sete meses deles escrevendo código.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Mais de 40.000 linhas de código e mais de 4.000 horas de desenvolvimento.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Seis a sete desenvolvedores, sem contar produto e QA.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Mais de 1.000 pull requests e deploys.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>No back-end, WordPress 6.8 e PHP 8.3, com Memcached, Elasticsearch e a CDN do WordPress VIP. No front-end, Next.js em Node, com API, middleware e páginas estáticas, e cache em Redis. Tudo roda na infraestrutura do WordPress VIP, com deploy pelo GitHub Actions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Os resultados</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>250 milhões de page views em um mês, 95% a mais do que em agosto do ano anterior.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Taxa de erro 40% menor, em 0,04%. Erro, aqui, é o que derruba a página, como um erro 500.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>A CNN Brasil se consolidou como o segundo maior portal de notícias do país e o maior que usa WordPress.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Também ficou mais fácil contratar e crescer o time. Parceiros como Canaltech e Canal Rural consomem o conteúdo da CNN pela mesma estrutura.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Vale para todo mundo?</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Para a CNN, valeu. Antes de migrar, sugiro responder a seis perguntas.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><!-- wp:list-item -->
+<li><strong>Necessidade.</strong> Por que migrar? Só para modernizar o site, ou há um aplicativo, outros sites e outras aplicações para atender?</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>Estabilidade.</strong> O site atual está estável, seguro e atualizado?</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>Plugins.</strong> Os plugins em uso são compatíveis com headless? Existe alternativa?</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>Equipe.</strong> Se não existe alternativa, há orçamento, tempo e gente para desenvolver? A CNN usava o Yoast SEO, que tinha problemas de desempenho com 3 milhões de posts, e escreveu o próprio plugin de SEO, pensado para headless.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>Tempo e foco.</strong> Dá para pausar o que estava planejado? A CNN ficou quase um ano sem entregar novidades no portal.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>Dinheiro.</strong> O site dá retorno que justifique o esforço?</li>
+<!-- /wp:list-item --></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Bons candidatos são portais de notícias, lojas virtuais, plataformas de cursos, conteúdo para assinantes, imobiliárias e corretoras. São sites que geram receita diretamente.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Para site institucional e landing page, acho arriscado. Se o institucional for grande de verdade, pode valer. Se não for, o resultado é maior adotando o editor de blocos e cuidando do desempenho dentro do próprio WordPress.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Perguntas da plateia</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Publicidade.</strong> Não muda. Os anúncios da CNN ficam no Google Tag Manager, com ou sem headless. A receita cresceu com o ganho de audiência e de viewability, que também poderia ter vindo no modelo acoplado.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Mídia.</strong> A CNN não gera recortes das imagens no upload. O envio fica mais rápido e o armazenamento, menor. As imagens são otimizadas e convertidas para WebP no upload.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Por que não Astro.</strong> O Astro é focado em geração estática. A CNN precisa executar regras antes de gerar a página, como tempo de cache por tipo de página e redirecionamentos, e faz isso no middleware do Next. Gerar tudo no build também não serve: seriam pelo menos 300.000 páginas a cada deploy. O foco é renderizar no servidor e servir o cache pela CDN.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Plugins abertos.</strong> O plugin de documentação de APIs citado na palestra é o <a href="https://restpress.org/">restpress</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Conclusão</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Headless não é sobre modernizar um site. É um convite para repensar a tecnologia e a distribuição de conteúdo. Os requisitos, a infraestrutura e a equipe mudam. Na minha visão, mudam para melhor, mas o custo é alto.</p>
+<!-- /wp:paragraph -->

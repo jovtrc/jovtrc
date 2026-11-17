@@ -1,0 +1,105 @@
+/*
+Theme Name: Carvalho
+Theme URI: https://carvalho.cc
+Author: João Carvalho
+Author URI: https://carvalho.cc
+Description: Tema de blocos do site pessoal de João Carvalho.
+Version: 0.1.0
+Requires at least: 6.7
+Tested up to: 7.1
+Requires PHP: 8.3
+License: GPL-2.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: carvalho
+Domain Path: /languages
+*/
+
+/* Só o que o theme.json não cobre. */
+
+h1,
+h2,
+h3,
+h4,
+.wp-block-site-title,
+.has-display-font-family {
+    font-stretch: 116%;
+    text-wrap: balance;
+}
+
+.has-display-font-family {
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+}
+
+a {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+}
+
+.wp-block-navigation a:hover,
+.wp-block-post-title a:hover {
+    text-decoration: underline;
+}
+
+:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+}
+
+.carvalho-headline {
+    max-width: 15.5em;
+}
+
+.carvalho-measure {
+    max-width: 33em;
+}
+
+.carvalho-prose {
+    max-width: 45rem;
+    font-size: 1.125rem;
+    line-height: 1.65;
+}
+
+.carvalho-section,
+.carvalho-rows > li + li,
+.carvalho-link {
+    border-top: 1px solid var(--wp--preset--color--line);
+}
+
+.carvalho-rows > li + li {
+    margin-block-start: 1rem;
+    padding-block-start: 1rem;
+}
+
+.carvalho-row > :first-child {
+    flex: 1 1 18em;
+}
+
+.carvalho-links {
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.carvalho-link {
+    position: relative;
+    padding-block: 0.9375rem 1rem;
+}
+
+.carvalho-link:last-child {
+    border-bottom: 1px solid var(--wp--preset--color--line);
+}
+
+.carvalho-link a {
+    text-decoration: none;
+}
+
+.carvalho-link a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+.carvalho-link a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,11 @@
+# Aqui ficam as configurações do seu ambiente de desenvolvimento local.
+# Quando iniciar "42wp start" pela primeira vez, o script irá criar um novo projeto WordPress com as configurações abaixo.
+
+project_slug=carvalho   # A URL do projeto vira http://carvalho.localhost
+multisite=false         # false | subdir | subdomain
+username=joao
+password=password
+locale=pt_BR
+default_theme=carvalho
+wpvip=false
+initial_content=10

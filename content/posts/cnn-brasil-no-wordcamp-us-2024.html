@@ -1,0 +1,263 @@
+<!-- wp:paragraph -->
+<p>Em 18 de setembro de 2024, apresentei no WordCamp US, em Portland, a palestra “Breaking News: CNN’s Rise to Industry Leader in Brazil”, com Brian Alvey, do WordPress VIP. Na época, eu era líder técnico na CNN Brasil, onde fui o primeiro desenvolvedor. Este texto resume a palestra. O <a href="https://www.youtube.com/live/EL9x9aw54as?t=11475s">vídeo completo</a> está no YouTube, em inglês.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A CNN Brasil começou a operar em 2019. Em 2024, era o terceiro maior portal de notícias do país. A palestra tratou do lado técnico desse caminho, em três partes: boas práticas de engenharia, cultura do time e adoção de tecnologia.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Boas práticas de engenharia</h2>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Core Web Vitals</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Trabalhamos nas três métricas em que a maioria dos sites tem problema.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>LCP.</strong> Os problemas eram a imagem destacada, o título da matéria e a carga da página, todos lentos. O que fizemos:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Recortes de imagem próprios para cada contexto: imagem destacada, mais lidas, home.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><code>fetchpriority</code> na imagem mais importante da página.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Otimização da fonte da CNN, que não é uma fonte feita para a web.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Correção de CSS e JavaScript que bloqueavam a renderização, com <code>async</code>, <code>defer</code> e carregamento tardio.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Redução do TTFB.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p><strong>CLS.</strong> O layout piscava, as imagens mudavam de tamanho e os anúncios empurravam o conteúdo. O que fizemos:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Imagens em tamanhos menores, todas na CDN e em WebP.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Google Tag Manager mais leve, com parte das tags movida para o WordPress.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Espaço reservado para cada anúncio, que pode recarregar sem mover a página.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>CSS crítico em linha no <code>head</code>: cabeçalho, título e imagem destacada. Foi a mudança de maior efeito.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p><strong>INP.</strong> A métrica mede a resposta da página à interação. O que fizemos:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li><code>throttle</code> e <code>debounce</code> em funções, como na busca automática.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Delegação de eventos: um ouvinte no card em vez de um em cada botão.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Carregamento tardio de iframes e de blocos que ficam no fim da página, como o gráfico de economia da home.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Com o carregamento tardio, o INP caiu de cerca de 300 ms para cerca de 100 ms.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Consultas e cache</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>O banco de dados tinha mais de 15 tipos de post, mais de 20 taxonomias, mais de 5 milhões de posts e mais de 80 GB. Com esse volume, uma consulta mal escrita derruba o site. Criamos regras:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Usar sempre <code>WP_Query</code>. Não usar <code>get_posts</code> nem <code>$wpdb</code>, que ignoram filtros do <code>WP_Query</code>.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Não usar <code>NOT IN</code>, que gera junções e deixa a consulta lenta.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Nunca usar <code>posts_per_page</code> igual a <code>-1</code>.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Sempre usar o cache de objetos ou transients.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Só rodar a consulta quando não houver outra opção.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Três ajustes deixam o <code>WP_Query</code> mais leve:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li><code>no_found_rows</code> quando não há paginação.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><code>fields</code> igual a <code>ids</code> quando só os IDs são necessários.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><code>update_post_meta_cache</code> e <code>update_post_term_cache</code> desligados quando metadados e termos não são usados.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Depois dessas mudanças, a nota no Lighthouse subiu da faixa de 30 a 40 para a faixa de 70 a 80. A visibilidade dos anúncios aumentou. O tempo de carga ficou perto de 500 ms.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Padrão de código</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Escrevemos um padrão de código próprio, baseado na PSR-2, no WordPress Coding Standards e no Clean Code. Ele é aplicado com PHPCS e Composer.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Cultura do time</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Documentação.</strong> O código legado era difícil de entender. Cada desenvolvedor conhecia só a parte que tinha escrito, e às vezes essa pessoa já tinha saído. Passamos a documentar todas as funções e classes, em PHP e em JavaScript. Não usamos comentários dentro das funções: o código precisa ser legível sozinho. Para as APIs, criamos o <a href="https://restpress.org/">restpress</a>, um plugin de código aberto que gera a documentação da REST API.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Revisão de código.</strong> A revisão não é a última etapa. Funciona como programação em par: antes de o código ficar pronto, quem escreve conversa com quem vai revisar sobre a lógica. A revisão ficou mais rápida, e o time passou a conhecer melhor o código dos colegas.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Dev talks.</strong> Uma reunião semanal em que os desenvolvedores falam do que estão fazendo e discutem o padrão de código e a documentação. Depois de quase um ano, a integração de novos desenvolvedores ficou mais rápida. Quem entrava enviava código para produção na primeira semana. Fazíamos mais de 10 deploys por semana.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Adoção de tecnologia</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Inteligência artificial.</strong> Já criávamos posts automáticos de esportes e de entretenimento. O plano era levar à redação sugestões de título, links internos automáticos e sugestões de texto.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>CI/CD.</strong> Os builds ficaram mais rápidos e os deploys, mais seguros. Um robô analisa cada pull request em busca de problemas de segurança, de desempenho e de padrão de código, antes da revisão humana. Os plugins viraram dependências do Composer e saíram do repositório.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Planos.</strong> Levar todo o conteúdo para o editor de blocos e migrar para WordPress headless com Next.js.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Os números de 2024</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Mais de 150 milhões de page views por mês.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Mais de 8.000 matérias por mês.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Mais de 1 bilhão de page views entre janeiro e agosto.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Cerca de 90% dos acessos vindos do Brasil.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A conversa com Brian Alvey</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Depois dos slides, Brian fez perguntas. A maior parte foi sobre headless, de que ele não é entusiasta.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>O argumento dele: com otimização e cache, um front-end em WordPress e um em Next.js têm a mesma velocidade. Headless faz sentido em casos específicos, como manter o front-end durante uma migração de CMS ou quando há dificuldade para contratar.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Os meus motivos para a CNN:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Mais controle sobre desempenho, com geração estática e gestão dos assets.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Separação entre back-end e front-end. A CNN já tinha muitas APIs, usadas pelo site e por parceiros.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Contratação. No Brasil, era difícil encontrar desenvolvedores de front-end especializados em WordPress.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Segurança não era motivo. O WordPress é seguro, e os problemas costumam vir de plugins de terceiros.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Outros pontos da conversa:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li><strong>Pré-visualização.</strong> Em headless, precisa ser refeita, com uma API consumida pelo Next.js.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>Editor.</strong> A redação usava o editor clássico, shortcodes e o Fieldmanager.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>CMS anterior.</strong> Antes do WordPress, a CNN Brasil usava outro CMS, com problemas no envio de mídia e conteúdo que desaparecia.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>Pull requests.</strong> Para a revisão não atrasar: contexto na descrição, nomes de commit que façam sentido e pull requests pequenos.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>A migração para headless entrou em produção em 2025. Contei como foi em <a href="/blog/myths-and-truths-a-recap-of-my-talk-on-headless-wordpress/">outra palestra</a>, no WordCamp Brasil.</p>
+<!-- /wp:paragraph -->

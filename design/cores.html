@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>carvalho.cc: Variação 1 em outras cores</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; padding: 40px 32px 96px; background: #e8e8e8; color: #1b1d26; font: 400 15px/1.5 system-ui, sans-serif; }
+.sheet { max-width: 1640px; margin: 0 auto; }
+.sheet > h1 { font-size: 22px; margin: 0 0 4px; }
+.sheet > p { margin: 0 0 40px; color: #555866; max-width: 86ch; }
+.direction { margin-bottom: 72px; }
+.direction > h2 { font-size: 20px; margin: 0 0 4px; }
+.direction > p { margin: 0 0 16px; color: #555866; max-width: 86ch; }
+.swatches { display: flex; gap: 10px; margin-bottom: 20px; }
+.swatch { width: 118px; font-size: 12px; line-height: 1.35; color: #555866; }
+.swatch i { display: block; height: 44px; border-radius: 6px; border: 1px solid rgba(0, 0, 0, .12); margin-bottom: 6px; }
+.swatch b { display: block; color: #1b1d26; }
+.screens { display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start; }
+.frame { border: 1px solid #c4c6ce; border-radius: 10px; overflow: hidden; }
+.desk { width: 1180px; }
+.phone { width: 390px; }
+
+.azul { --bg: #10317f; --fg: #f5f3ec; --muted: #b7c5e8; --line: rgba(245, 243, 236, .24); --ph: rgba(245, 243, 236, .12); --btn-bg: #f5f3ec; --btn-fg: #10317f; --band-bg: #f5f3ec; --band-fg: #10317f; --band-muted: #3d5596; }
+.verde { --bg: #173f2e; --fg: #f3f0e4; --muted: #b3ccbc; --line: rgba(243, 240, 228, .24); --ph: rgba(243, 240, 228, .12); --btn-bg: #f3f0e4; --btn-fg: #173f2e; --band-bg: #f3f0e4; --band-fg: #173f2e; --band-muted: #47695a; }
+.bordo { --bg: #5a1526; --fg: #f6efe6; --muted: #e3bcc3; --line: rgba(246, 239, 230, .24); --ph: rgba(246, 239, 230, .12); --btn-bg: #f6efe6; --btn-fg: #5a1526; --band-bg: #f6efe6; --band-fg: #5a1526; --band-muted: #84505b; }
+.amarelo { --bg: #f5cf3f; --fg: #14183a; --muted: #4d4930; --line: rgba(20, 24, 58, .26); --ph: rgba(20, 24, 58, .12); --btn-bg: #14183a; --btn-fg: #f5cf3f; --band-bg: #14183a; --band-fg: #f5cf3f; --band-muted: #c9c4a0; }
+.rosa { --bg: #10317f; --fg: #f5f3ec; --muted: #b7c5e8; --line: rgba(245, 243, 236, .24); --ph: rgba(245, 243, 236, .12); --btn-bg: #f7c6d0; --btn-fg: #10317f; --band-bg: #f7c6d0; --band-fg: #10317f; --band-muted: #3d4f8f; }
+
+.site { background: var(--bg); color: var(--fg); font: 400 17px/1.55 "IBM Plex Sans", sans-serif; }
+.site a { color: inherit; text-decoration: none; }
+.site h1, .site h2, .site h3, .site p, .site ul, .site figure { margin: 0; padding: 0; }
+.site ul { list-style: none; }
+.site .d { font-family: "Archivo", sans-serif; font-weight: 800; font-stretch: 116%; letter-spacing: -.035em; }
+.site .pad { padding-inline: 72px; }
+.site .bar { display: flex; justify-content: space-between; align-items: baseline; padding-block: 30px; }
+.site .bar .d { font-size: 21px; letter-spacing: -.02em; }
+.site .bar ul { display: flex; gap: 30px; font-size: 16px; }
+.site .hero { padding-block: 84px 100px; }
+.site .hero h1 { font-size: 62px; line-height: 1.02; max-width: 960px; text-wrap: balance; }
+.site .hero p { margin-top: 30px; font-size: 21px; line-height: 1.5; color: var(--muted); max-width: 33em; }
+.site .actions { display: flex; flex-wrap: wrap; gap: 14px 30px; align-items: center; margin-top: 38px; font-size: 16px; }
+.site .btn { display: inline-flex; align-items: center; height: 52px; padding: 0 24px; border-radius: 4px; background: var(--btn-bg); color: var(--btn-fg); font-weight: 600; }
+.site .u { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+.site .block { display: grid; grid-template-columns: 250px minmax(0, 1fr); border-top: 1px solid var(--line); padding-block: 44px 60px; }
+.site .block > h2 { font-size: 23px; letter-spacing: -.02em; line-height: 1.2; }
+.site .talks { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.site .talks figure { aspect-ratio: 16 / 9; background: var(--ph); border-radius: 4px; display: flex; align-items: flex-end; padding: 12px 14px; font-size: 13px; color: var(--muted); }
+.site .talks h3 { margin-top: 20px; font-size: 27px; line-height: 1.12; text-wrap: balance; }
+.site .talks p { margin-top: 10px; color: var(--muted); }
+.site .band { background: var(--band-bg); color: var(--band-fg); padding-block: 80px 88px; }
+.site .band h2 { font-size: 52px; line-height: 1.02; }
+.site .band p { margin-top: 20px; font-size: 20px; color: var(--band-muted); max-width: 31em; }
+.site .band .btn { margin-top: 32px; background: var(--band-fg); color: var(--band-bg); }
+.site .foot { display: flex; justify-content: space-between; padding-block: 28px 36px; font-size: 15px; color: var(--muted); }
+.site .foot ul { display: flex; gap: 24px; }
+
+.site.links { min-height: 720px; padding: 46px 24px 30px; display: flex; flex-direction: column; }
+.site.links h1 { font-size: 34px; line-height: 1; }
+.site.links .role { margin-top: 12px; color: var(--muted); font-size: 17px; line-height: 1.45; }
+.site.links .btn { margin-top: 28px; justify-content: center; font-size: 17px; height: 56px; }
+.site.links ul { margin-top: 26px; border-bottom: 1px solid var(--line); }
+.site.links li a { display: block; padding-block: 15px 16px; border-top: 1px solid var(--line); }
+.site.links li b { display: block; font-size: 23px; line-height: 1.15; }
+.site.links li span { display: block; margin-top: 4px; font-size: 15px; color: var(--muted); }
+.site.links .home { margin-top: auto; padding-top: 28px; font-size: 15px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <h1>carvalho.cc: Variação 1 em outras cores</h1>
+  <p>Mesmo layout e mesmas fontes da Variação 1 (Archivo largo nos títulos, IBM Plex Sans no texto). Só a cor muda. O azul aprovado está no fim, para comparação. A home aparece resumida: abertura, palestras e faixa de convite.</p>
+
+  <section class="direction">
+    <h2>Verde-carvalho</h2>
+    <p>Verde escuro de folha de carvalho, com texto cor de papel. É a única cor que sai do seu sobrenome.</p>
+    <div class="swatches">
+      <div class="swatch"><i style="background:#173f2e"></i><b>Verde-carvalho</b>#173f2e</div>
+      <div class="swatch"><i style="background:#f3f0e4"></i><b>Papel</b>#f3f0e4</div>
+      <div class="swatch"><i style="background:#b3ccbc"></i><b>Musgo claro</b>#b3ccbc</div>
+    </div>
+    <div class="screens">
+      <div class="frame desk" data-tpl="home" data-v="verde"></div>
+      <div class="frame phone" data-tpl="links" data-v="verde"></div>
+    </div>
+  </section>
+
+  <section class="direction">
+    <h2>Bordô</h2>
+    <p>Vinho escuro com texto cor de papel. Sóbrio e raro em sites de tecnologia.</p>
+    <div class="swatches">
+      <div class="swatch"><i style="background:#5a1526"></i><b>Bordô</b>#5a1526</div>
+      <div class="swatch"><i style="background:#f6efe6"></i><b>Papel</b>#f6efe6</div>
+      <div class="swatch"><i style="background:#e3bcc3"></i><b>Rosa seco</b>#e3bcc3</div>
+    </div>
+    <div class="screens">
+      <div class="frame desk" data-tpl="home" data-v="bordo"></div>
+      <div class="frame phone" data-tpl="links" data-v="bordo"></div>
+    </div>
+  </section>
+
+  <section class="direction">
+    <h2>Amarelo</h2>
+    <p>Campo amarelo com tinta azul-marinho. É a mais chamativa e a menos formal das opções.</p>
+    <div class="swatches">
+      <div class="swatch"><i style="background:#f5cf3f"></i><b>Amarelo</b>#f5cf3f</div>
+      <div class="swatch"><i style="background:#14183a"></i><b>Marinho</b>#14183a</div>
+      <div class="swatch"><i style="background:#4d4930"></i><b>Oliva escuro</b>#4d4930</div>
+    </div>
+    <div class="screens">
+      <div class="frame desk" data-tpl="home" data-v="amarelo"></div>
+      <div class="frame phone" data-tpl="links" data-v="amarelo"></div>
+    </div>
+  </section>
+
+  <section class="direction">
+    <h2>Azul-real com rosa</h2>
+    <p>O azul aprovado continua como fundo; o botão e a faixa de convite passam a ser rosa claro. Soma uma segunda cor sem trocar a primeira.</p>
+    <div class="swatches">
+      <div class="swatch"><i style="background:#10317f"></i><b>Azul-real</b>#10317f</div>
+      <div class="swatch"><i style="background:#f7c6d0"></i><b>Rosa claro</b>#f7c6d0</div>
+      <div class="swatch"><i style="background:#f5f3ec"></i><b>Papel</b>#f5f3ec</div>
+    </div>
+    <div class="screens">
+      <div class="frame desk" data-tpl="home" data-v="rosa"></div>
+      <div class="frame phone" data-tpl="links" data-v="rosa"></div>
+    </div>
+  </section>
+
+  <section class="direction">
+    <h2>Azul-real (aprovado, para comparação)</h2>
+    <div class="swatches">
+      <div class="swatch"><i style="background:#10317f"></i><b>Azul-real</b>#10317f</div>
+      <div class="swatch"><i style="background:#f5f3ec"></i><b>Papel</b>#f5f3ec</div>
+      <div class="swatch"><i style="background:#b7c5e8"></i><b>Bruma</b>#b7c5e8</div>
+    </div>
+    <div class="screens">
+      <div class="frame desk" data-tpl="home" data-v="azul"></div>
+      <div class="frame phone" data-tpl="links" data-v="azul"></div>
+    </div>
+  </section>
+</div>
+
+<template id="home">
+  <div class="site">
+    <div class="pad bar">
+      <a class="d" href="#">João Carvalho</a>
+      <ul><li><a href="#">Sobre</a></li><li><a href="#">Palestras</a></li><li><a href="#">Blog</a></li><li><a href="#">Links</a></li></ul>
+    </div>
+    <div class="pad hero">
+      <h1 class="d">Sou Head of Engineering na 42WP. Trabalho com WordPress para grandes empresas de mídia.</h1>
+      <p>Cuido de arquitetura, migrações e times em projetos de WordPress VIP. Também sou professor e palestro sobre o que aprendo nesses projetos.</p>
+      <div class="actions"><a class="btn" href="#">Convidar para palestrar</a><a class="u" href="#">Seguir no LinkedIn</a><a class="u" href="#">Ver todos os links</a></div>
+    </div>
+    <div class="pad">
+      <div class="block">
+        <h2 class="d">Palestras</h2>
+        <div class="talks">
+          <div>
+            <figure>Foto da palestra</figure>
+            <h3 class="d">WordPress headless: mitos e verdades</h3>
+            <p>WordCamp Brasil, 2025</p>
+          </div>
+          <div>
+            <figure>Foto da palestra</figure>
+            <h3 class="d">Breaking News: CNN's Rise to Industry Leader in Brazil</h3>
+            <p>WordCamp US, 2024</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pad band">
+      <h2 class="d">Convites para palestras</h2>
+      <p>Falo sobre WordPress em grande escala, headless e engenharia para empresas de mídia. Para convites, escreva pelo LinkedIn.</p>
+      <a class="btn" href="#">Convidar para palestrar</a>
+    </div>
+    <div class="pad foot">
+      <span>João Carvalho, 2026</span>
+      <ul><li>LinkedIn</li><li>GitHub</li><li>YouTube</li><li>RSS</li></ul>
+    </div>
+  </div>
+</template>
+
+<template id="links">
+  <div class="site links">
+    <h1 class="d">João Carvalho</h1>
+    <p class="role">Head of Engineering na 42WP. Professor e palestrante.</p>
+    <a class="btn" href="#">Convidar para palestrar</a>
+    <ul>
+      <li><a href="#"><b class="d">LinkedIn</b><span>Onde publico com mais frequência</span></a></li>
+      <li><a href="#"><b class="d">YouTube</b><span>Aulas e palestras</span></a></li>
+      <li><a href="#"><b class="d">GitHub</b><span>Código aberto</span></a></li>
+      <li><a href="#"><b class="d">Blog</b><span>Textos sobre WordPress e engenharia</span></a></li>
+      <li><a href="#"><b class="d">Tinta</b><span>Wiki privada para equipes, dentro do WordPress</span></a></li>
+    </ul>
+    <a class="home u" href="#">carvalho.cc</a>
+  </div>
+</template>
+
+<script>
+document.querySelectorAll('.frame[data-tpl]').forEach(function (frame) {
+  var site = document.getElementById(frame.dataset.tpl).content.firstElementChild.cloneNode(true);
+  site.classList.add(frame.dataset.v);
+  frame.appendChild(site);
+});
+</script>
+</body>
+</html>

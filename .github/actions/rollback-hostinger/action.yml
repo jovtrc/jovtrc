@@ -1,0 +1,86 @@
+name: "Rollback (Hostinger)"
+description: "Re-point the Hostinger 'current' symlink to a previous release. Reuses deploy-hostinger/activate-release.sh."
+
+inputs:
+  ssh-host:
+    required: true
+  ssh-user:
+    required: true
+  ssh-password:
+    required: true
+  ssh-port:
+    required: false
+    default: "65002"
+  target-release:
+    description: "Release id to roll back to (empty = the release before the active one)."
+    required: false
+    default: ""
+  site-url:
+    description: "Public URL for the post-rollback health check (optional)."
+    required: false
+    default: ""
+
+runs:
+  using: composite
+  steps:
+    - name: Install sshpass
+      shell: bash
+      run: |
+        sudo apt-get update -qq
+        sudo apt-get install -y sshpass
+
+    - name: Resolve target and re-pivot 'current'
+      shell: bash
+      env:
+        SSHPASS: ${{ inputs.ssh-password }}
+        WP_CONTENT_SUBPATH: domains/carvalho.cc/public_html/wp-content
+        RELEASES_DIRNAME: _deployment_files
+        PER_ITEM_DIRS: "themes plugins"
+        WHOLE_DIRS: ""
+        KEEP_RELEASES: "3"
+      run: |
+        set -euo pipefail
+        PORT="${{ inputs.ssh-port }}"
+        SSH="sshpass -e ssh -p $PORT -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+        REMOTE="${{ inputs.ssh-user }}@${{ inputs.ssh-host }}"
+
+        # ~/domains/carvalho.cc/public_html/wp-content → caminho absoluto (o shell remoto expande $HOME).
+        REMOTE_HOME="$($SSH "$REMOTE" 'printf %s "$HOME"')"
+        [ -n "$REMOTE_HOME" ] || { echo "::error::Não foi possível resolver \$HOME no host remoto."; exit 1; }
+        REMOTE_WP_CONTENT="$REMOTE_HOME/$WP_CONTENT_SUBPATH"
+        echo "📁 wp-content remoto: $REMOTE_WP_CONTENT"
+
+        RELEASES="$REMOTE_WP_CONTENT/$RELEASES_DIRNAME"
+
+        FROM="$($SSH "$REMOTE" "readlink '$RELEASES/current' 2>/dev/null || echo '?'")"
+
+        echo "🔎 Resolving rollback target…"
+        TARGET="$($SSH "$REMOTE" "\
+          DEPLOY_WP_CONTENT='$REMOTE_WP_CONTENT' \
+          DEPLOY_RELEASES_DIRNAME='$RELEASES_DIRNAME' \
+          DEPLOY_TARGET_RELEASE='${{ inputs.target-release }}' \
+          bash -s" < "${{ github.action_path }}/resolve-rollback-target.sh")"
+
+        echo "↩️  Rollback: $FROM → $TARGET"
+
+        $SSH "$REMOTE" "\
+          DEPLOY_WP_CONTENT='$REMOTE_WP_CONTENT' \
+          DEPLOY_RELEASES_DIRNAME='$RELEASES_DIRNAME' \
+          DEPLOY_RELEASE_ID='$TARGET' \
+          DEPLOY_PER_ITEM_DIRS='$PER_ITEM_DIRS' \
+          DEPLOY_WHOLE_DIRS='$WHOLE_DIRS' \
+          DEPLOY_KEEP='$KEEP_RELEASES' \
+          bash -s" < "${{ github.action_path }}/../deploy-hostinger/activate-release.sh"
+
+    - name: Health check
+      if: ${{ inputs.site-url != '' }}
+      shell: bash
+      run: |
+        set -euo pipefail
+        code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 "${{ inputs.site-url }}" || echo 000)"
+        echo "HTTP $code ← ${{ inputs.site-url }}"
+        if [ "$code" -ge 500 ] || [ "$code" = "000" ]; then
+          echo "::error::Health check failed after rollback (HTTP $code)."
+          exit 1
+        fi
+        echo "✅ Health check OK (HTTP $code)"

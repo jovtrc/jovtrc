@@ -1,0 +1,31 @@
+{
+    "name": "jovtrc/carvalho-cc",
+    "description": "Site pessoal de João Carvalho (wp-content do carvalho.cc)",
+    "type": "project",
+    "license": "proprietary",
+    "config": {
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    },
+    "repositories": [
+        {
+            "name": "wp-packages",
+            "type": "composer",
+            "url": "https://repo.wp-packages.org"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "wp-plugin/litespeed-cache": "^7.9",
+        "wp-plugin/tinta": "^0.1"
+    },
+    "extra": {
+        "installer-paths": {
+            "plugins/{$name}/": [
+                "type:wordpress-plugin"
+            ]
+        }
+    }
+}

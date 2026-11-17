@@ -1,0 +1,126 @@
+name: "Deploy to Hostinger"
+description: "Install plugins (Composer) and deploy to Hostinger via SSH with atomic symlink releases."
+
+inputs:
+  ssh-host:
+    description: "Hostinger SSH host."
+    required: true
+  ssh-user:
+    description: "Hostinger SSH user."
+    required: true
+  ssh-password:
+    description: "Hostinger SSH password (password auth via sshpass)."
+    required: true
+  ssh-port:
+    description: "Hostinger SSH port (normalmente 65002)."
+    required: false
+    default: "65002"
+  site-url:
+    description: "Public URL for the post-deploy health check (optional)."
+    required: false
+    default: ""
+
+runs:
+  using: composite
+  steps:
+    - name: Setup PHP 8.3
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: "8.3"
+        extensions: mbstring, xml, zip, pdo
+        tools: composer:v2
+        coverage: none
+
+    - name: Install PHP deps (prod) — instala os plugins em plugins/ via installer-paths
+      shell: bash
+      run: composer install --no-dev --optimize-autoloader
+
+    - name: Prepare staging (deployable dirs)
+      shell: bash
+      env:
+        PER_ITEM_DIRS: "themes plugins"
+        WHOLE_DIRS: ""
+      run: |
+        set -euo pipefail
+        # Monta a lista de exclusão do rsync a partir do .deployignore (sem comentários,
+        # linhas vazias e re-inclusões '!').
+        grep -vE '^\s*#' .deployignore | grep -vE '^\s*$' | grep -vE '^\s*!' > /tmp/rsync-exclude.txt
+        printf '%s\n' ".git" ".github" ".deployignore" >> /tmp/rsync-exclude.txt
+        rm -rf ../staging-deploy && mkdir -p ../staging-deploy
+        for d in $PER_ITEM_DIRS $WHOLE_DIRS; do
+          if [ -d "$d" ]; then
+            rsync -a --exclude-from=/tmp/rsync-exclude.txt "$d" ../staging-deploy/
+          else
+            echo "::warning::Deploy dir '$d' not found — skipping"
+          fi
+        done
+        du -sh ../staging-deploy
+
+    - name: Compute release id
+      shell: bash
+      run: echo "RELEASE_ID=$(date -u +%Y%m%d-%H%M%S)-${GITHUB_SHA::7}" >> "$GITHUB_ENV"
+
+    - name: Install sshpass
+      shell: bash
+      run: |
+        sudo apt-get update -qq
+        sudo apt-get install -y sshpass
+
+    - name: Upload release and activate (atomic symlink pivot)
+      shell: bash
+      env:
+        SSHPASS: ${{ inputs.ssh-password }}
+        WP_CONTENT_SUBPATH: domains/carvalho.cc/public_html/wp-content
+        RELEASES_DIRNAME: _deployment_files
+        PER_ITEM_DIRS: "themes plugins"
+        WHOLE_DIRS: ""
+        KEEP_RELEASES: "3"
+      run: |
+        set -euo pipefail
+        PORT="${{ inputs.ssh-port }}"
+        SSH="sshpass -e ssh -p $PORT -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+        REMOTE="${{ inputs.ssh-user }}@${{ inputs.ssh-host }}"
+
+        # ~/domains/carvalho.cc/public_html/wp-content → caminho absoluto (o shell remoto expande $HOME;
+        # o '~' NÃO expandiria dentro das aspas simples dos comandos remotos nem no
+        # --link-dest do rsync, então resolvemos uma vez).
+        REMOTE_HOME="$($SSH "$REMOTE" 'printf %s "$HOME"')"
+        [ -n "$REMOTE_HOME" ] || { echo "::error::Não foi possível resolver \$HOME no host remoto."; exit 1; }
+        REMOTE_WP_CONTENT="$REMOTE_HOME/$WP_CONTENT_SUBPATH"
+        echo "📁 wp-content remoto: $REMOTE_WP_CONTENT"
+
+        RELEASE_PATH="$REMOTE_WP_CONTENT/$RELEASES_DIRNAME/$RELEASE_ID"
+
+        echo "📤 Uploading release '$RELEASE_ID'"
+        $SSH "$REMOTE" "mkdir -p '$RELEASE_PATH'"
+
+        # --link-dest → arquivos inalterados viram hardlinks contra o release ativo.
+        LINKDEST=""
+        if $SSH "$REMOTE" "test -d '$REMOTE_WP_CONTENT/$RELEASES_DIRNAME/current'"; then
+          LINKDEST="--link-dest=$REMOTE_WP_CONTENT/$RELEASES_DIRNAME/current/"
+        fi
+        rsync -az --delete $LINKDEST -e "$SSH" ../staging-deploy/ "$REMOTE:$RELEASE_PATH/"
+        echo "✅ Upload done — live site untouched until the symlink swap."
+
+        echo "🔁 Activating release (atomic 'current' pivot)…"
+        $SSH "$REMOTE" "\
+          DEPLOY_WP_CONTENT='$REMOTE_WP_CONTENT' \
+          DEPLOY_RELEASES_DIRNAME='$RELEASES_DIRNAME' \
+          DEPLOY_RELEASE_ID='$RELEASE_ID' \
+          DEPLOY_PER_ITEM_DIRS='$PER_ITEM_DIRS' \
+          DEPLOY_WHOLE_DIRS='$WHOLE_DIRS' \
+          DEPLOY_KEEP='$KEEP_RELEASES' \
+          bash -s" < "${{ github.action_path }}/activate-release.sh"
+
+    - name: Health check
+      if: ${{ inputs.site-url != '' }}
+      shell: bash
+      run: |
+        set -euo pipefail
+        code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 "${{ inputs.site-url }}" || echo 000)"
+        echo "HTTP $code ← ${{ inputs.site-url }}"
+        if [ "$code" -ge 500 ] || [ "$code" = "000" ]; then
+          echo "::error::Health check failed (HTTP $code). A manual rollback may be needed."
+          exit 1
+        fi
+        echo "✅ Health check OK (HTTP $code)"

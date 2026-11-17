@@ -1,0 +1,38 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# DEPLOY — Hostinger via SSH (releases atômicos por symlink).
+#
+# A cada push na branch de deploy (abaixo) os plugins são instalados pelo
+# Composer e o site é enviado como um novo release em
+# ~/domains/carvalho.cc/public_html/wp-content/_deployment_files/<id>/; a troca
+# do symlink `current` publica tudo de uma vez. Rollback: `rollback.yml`.
+#
+# Secrets (Environment `production`): SSH_HOST / SSH_USER / SSH_PASSWORD e,
+# opcionalmente, SSH_PORT (a Hostinger costuma usar 65002). Variável opcional
+# SITE_URL habilita o health check.
+# ─────────────────────────────────────────────────────────────────────────────
+name: Deploy (Hostinger)
+
+on:
+  push:
+    branches:
+      - carvalho-cc
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy (Hostinger)
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/deploy-hostinger
+        with:
+          ssh-host: ${{ secrets.SSH_HOST }}
+          ssh-user: ${{ secrets.SSH_USER }}
+          ssh-password: ${{ secrets.SSH_PASSWORD }}
+          ssh-port: ${{ secrets.SSH_PORT || '65002' }}
+          site-url: ${{ vars.SITE_URL }}

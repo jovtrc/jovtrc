@@ -1,0 +1,36 @@
+# Arquivos do repositório que não vão para o servidor.
+# Só themes/ e plugins/ são enviados; esta lista filtra o que há dentro deles.
+
+node_modules/
+**/node_modules/
+
+# Arquivos soltos na raiz de themes/ e plugins/
+/themes/index.php
+.gitkeep
+**/.gitkeep
+
+# Controle de versão e editores
+.git/
+.gitignore
+**/.gitignore
+.gitattributes
+**/.gitattributes
+.github/
+**/.github/
+.editorconfig
+**/.editorconfig
+.idea/
+.vscode/
+
+# Ambiente e segredos
+.env
+.env.*
+**/.env
+**/.env.*
+auth.json
+
+# Logs e arquivos de sistema
+*.log
+**/*.log
+.DS_Store
+Thumbs.db

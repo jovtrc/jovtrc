@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>carvalho.cc: direções visuais, terceira rodada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Besley:wght@400..900&family=Familjen+Grotesk:wght@400..700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; padding: 40px 32px 96px; background: #e8e8e8; color: #1b1d26; font: 400 15px/1.5 system-ui, sans-serif; }
+.sheet { max-width: 1640px; margin: 0 auto; }
+.sheet > h1 { font-size: 22px; margin: 0 0 4px; }
+.sheet > p { margin: 0 0 40px; color: #555866; max-width: 86ch; }
+.direction { margin-bottom: 80px; }
+.direction > h2 { font-size: 20px; margin: 0 0 4px; }
+.direction > p { margin: 0 0 20px; color: #555866; max-width: 86ch; }
+.tokens { display: flex; flex-wrap: wrap; gap: 28px 48px; margin-bottom: 24px; align-items: flex-start; }
+.swatches { display: flex; gap: 10px; }
+.swatch { width: 118px; font-size: 12px; line-height: 1.35; color: #555866; }
+.swatch i { display: block; height: 56px; border-radius: 6px; border: 1px solid rgba(0, 0, 0, .12); margin-bottom: 6px; }
+.swatch b { display: block; color: #1b1d26; }
+.specimen { font-size: 12px; color: #555866; }
+.specimen span { display: block; color: #1b1d26; }
+.screens { display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start; }
+.screen > small { display: block; margin-bottom: 8px; color: #555866; }
+.frame { border: 1px solid #c4c6ce; border-radius: 10px; overflow: hidden; }
+.desk { width: 1180px; }
+.phone { width: 390px; }
+
+.v1 { --bg: #10317f; --fg: #f5f3ec; --muted: #b7c5e8; --line: rgba(245, 243, 236, .24); --ph: rgba(245, 243, 236, .12); --btn-bg: #f5f3ec; --btn-fg: #10317f; --band-bg: #f5f3ec; --band-fg: #10317f; --band-muted: #3d5596; --display: "Archivo", sans-serif; --dw: 800; --ds: 116%; --dt: -.035em; --h1: 62px; }
+.v2 { --bg: #c9dcff; --fg: #0e1b4d; --muted: #3d4c82; --line: rgba(14, 27, 77, .22); --ph: rgba(14, 27, 77, .1); --btn-bg: #0e1b4d; --btn-fg: #eef3ff; --band-bg: #0e1b4d; --band-fg: #eaf1ff; --band-muted: #aebde6; --display: "Familjen Grotesk", sans-serif; --dw: 700; --ds: 100%; --dt: -.035em; --h1: 74px; }
+.v3 { --bg: #0d3a4f; --fg: #f4f0e6; --muted: #a8c6d2; --line: rgba(244, 240, 230, .24); --ph: rgba(244, 240, 230, .12); --btn-bg: #f4f0e6; --btn-fg: #0d3a4f; --band-bg: #f4f0e6; --band-fg: #0d3a4f; --band-muted: #3f6577; --display: "Besley", serif; --dw: 700; --ds: 100%; --dt: -.025em; --h1: 62px; }
+
+.site { background: var(--bg); color: var(--fg); font: 400 17px/1.55 "IBM Plex Sans", sans-serif; }
+.site a { color: inherit; text-decoration: none; }
+.site h1, .site h2, .site h3, .site p, .site ul, .site figure { margin: 0; padding: 0; }
+.site ul { list-style: none; }
+.site .d { font-family: var(--display); font-weight: var(--dw); font-stretch: var(--ds); letter-spacing: var(--dt); }
+.site .pad { padding-inline: 72px; }
+.site .bar { display: flex; justify-content: space-between; align-items: baseline; padding-block: 30px; }
+.site .bar .d { font-size: 21px; letter-spacing: -.02em; }
+.site .bar ul { display: flex; gap: 30px; font-size: 16px; }
+.site .hero { padding-block: 84px 100px; }
+.site .hero h1 { font-size: var(--h1); line-height: 1.02; max-width: 960px; text-wrap: balance; }
+.site .hero p { margin-top: 30px; font-size: 21px; line-height: 1.5; color: var(--muted); max-width: 33em; }
+.site .actions { display: flex; flex-wrap: wrap; gap: 14px 30px; align-items: center; margin-top: 38px; font-size: 16px; }
+.site .btn { display: inline-flex; align-items: center; height: 52px; padding: 0 24px; border-radius: 4px; background: var(--btn-bg); color: var(--btn-fg); font-weight: 600; }
+.site .u { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+.site .block { display: grid; grid-template-columns: 250px minmax(0, 1fr); border-top: 1px solid var(--line); padding-block: 44px 60px; }
+.site .block > h2 { font-size: 23px; letter-spacing: -.02em; line-height: 1.2; }
+.site .talks { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.site .talks figure { aspect-ratio: 16 / 9; background: var(--ph); border-radius: 4px; display: flex; align-items: flex-end; padding: 12px 14px; font-size: 13px; color: var(--muted); }
+.site .talks h3 { margin-top: 20px; font-size: 27px; line-height: 1.12; text-wrap: balance; }
+.site .talks p { margin-top: 10px; color: var(--muted); }
+.site .talks a { display: inline-block; margin-top: 12px; font-size: 16px; }
+.site .past { font-size: 40px; line-height: 1.12; max-width: 19em; text-wrap: balance; }
+.site .projects { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.site .projects h3 { font-size: 27px; line-height: 1.12; }
+.site .projects p { margin-top: 10px; color: var(--muted); max-width: 24em; }
+.site .projects a { display: inline-block; margin-top: 12px; font-size: 16px; }
+.site .posts li { display: flex; justify-content: space-between; align-items: baseline; gap: 48px; padding-block: 16px; border-top: 1px solid var(--line); }
+.site .posts li:first-child { border-top: 0; padding-top: 0; }
+.site .posts .d { font-size: 25px; line-height: 1.15; max-width: 22em; }
+.site .posts span { flex: none; color: var(--muted); font-size: 16px; }
+.site .band { background: var(--band-bg); color: var(--band-fg); padding-block: 80px 88px; }
+.site .band h2 { font-size: 52px; line-height: 1.02; }
+.site .band p { margin-top: 20px; font-size: 20px; color: var(--band-muted); max-width: 31em; }
+.site .band .btn { margin-top: 32px; background: var(--band-fg); color: var(--band-bg); }
+.site .foot { display: flex; justify-content: space-between; padding-block: 28px 36px; font-size: 15px; color: var(--muted); }
+.site .foot ul { display: flex; gap: 24px; }
+
+.site.links { min-height: 800px; padding: 46px 24px 30px; display: flex; flex-direction: column; }
+.site.links h1 { font-size: 34px; line-height: 1; }
+.site.links .role { margin-top: 12px; color: var(--muted); font-size: 17px; line-height: 1.45; }
+.site.links .btn { margin-top: 28px; justify-content: center; font-size: 17px; height: 56px; }
+.site.links ul { margin-top: 26px; border-bottom: 1px solid var(--line); }
+.site.links li a { display: block; padding-block: 15px 16px; border-top: 1px solid var(--line); }
+.site.links li b { display: block; font-size: 23px; line-height: 1.15; }
+.site.links li span { display: block; margin-top: 4px; font-size: 15px; color: var(--muted); }
+.site.links .home { margin-top: auto; padding-top: 28px; font-size: 15px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <h1>carvalho.cc: direções visuais, terceira rodada</h1>
+  <p>As três partem da antiga direção 1: campo de cor inteiro, frase grande de abertura e botão. O que muda é o que lembrava o WordPress: o azul sai do tom violeta do "blueberry" e os títulos ganham uma fonte com mais personalidade. A home passa a puxar para palestras, com fotos. O texto e as fotos são de demonstração.</p>
+
+  <section class="direction">
+    <h2>Variação 1: Azul-real</h2>
+    <p>A mais próxima da direção 1. Azul mais escuro e menos violeta, texto cor de papel. Títulos em Archivo largo e pesado.</p>
+    <div class="tokens">
+      <div class="swatches">
+        <div class="swatch"><i style="background:#10317f"></i><b>Azul-real</b>#10317f<br>fundo</div>
+        <div class="swatch"><i style="background:#f5f3ec"></i><b>Papel</b>#f5f3ec<br>texto, botão, faixa final</div>
+        <div class="swatch"><i style="background:#b7c5e8"></i><b>Bruma</b>#b7c5e8<br>texto secundário</div>
+      </div>
+      <div class="specimen">Títulos<span style="font:800 28px/1.1 'Archivo',sans-serif;font-stretch:116%;letter-spacing:-.03em">Archivo largo 800</span></div>
+      <div class="specimen">Texto<span style="font:400 19px/1.4 'IBM Plex Sans',sans-serif">IBM Plex Sans</span></div>
+    </div>
+    <div class="screens">
+      <div class="screen"><small>Home, desktop</small><div class="frame desk" data-tpl="home" data-v="v1"></div></div>
+      <div class="screen"><small>/links, celular</small><div class="frame phone" data-tpl="links" data-v="v1"></div></div>
+    </div>
+  </section>
+
+  <section class="direction">
+    <h2>Variação 2: Céu</h2>
+    <p>O inverso: campo azul claro com tinta azul-marinho. É a que menos lembra o WordPress, que sempre usa azul escuro com texto branco. Títulos em Familjen Grotesk.</p>
+    <div class="tokens">
+      <div class="swatches">
+        <div class="swatch"><i style="background:#c9dcff"></i><b>Céu</b>#c9dcff<br>fundo</div>
+        <div class="swatch"><i style="background:#0e1b4d"></i><b>Marinho</b>#0e1b4d<br>texto, botão, faixa final</div>
+        <div class="swatch"><i style="background:#3d4c82"></i><b>Ardósia</b>#3d4c82<br>texto secundário</div>
+      </div>
+      <div class="specimen">Títulos<span style="font:700 30px/1.1 'Familjen Grotesk',sans-serif;letter-spacing:-.03em">Familjen Grotesk 700</span></div>
+      <div class="specimen">Texto<span style="font:400 19px/1.4 'IBM Plex Sans',sans-serif">IBM Plex Sans</span></div>
+    </div>
+    <div class="screens">
+      <div class="screen"><small>Home, desktop</small><div class="frame desk" data-tpl="home" data-v="v2"></div></div>
+      <div class="screen"><small>/links, celular</small><div class="frame phone" data-tpl="links" data-v="v2"></div></div>
+    </div>
+  </section>
+
+  <section class="direction">
+    <h2>Variação 3: Petróleo</h2>
+    <p>Azul-petróleo, puxado para o verde, com texto cor de papel. Títulos em Besley, uma serifa egípcia herdada dos tipos de madeira.</p>
+    <div class="tokens">
+      <div class="swatches">
+        <div class="swatch"><i style="background:#0d3a4f"></i><b>Petróleo</b>#0d3a4f<br>fundo</div>
+        <div class="swatch"><i style="background:#f4f0e6"></i><b>Papel</b>#f4f0e6<br>texto, botão, faixa final</div>
+        <div class="swatch"><i style="background:#a8c6d2"></i><b>Névoa</b>#a8c6d2<br>texto secundário</div>
+      </div>
+      <div class="specimen">Títulos<span style="font:700 28px/1.1 'Besley',serif;letter-spacing:-.02em">Besley 700</span></div>
+      <div class="specimen">Texto<span style="font:400 19px/1.4 'IBM Plex Sans',sans-serif">IBM Plex Sans</span></div>
+    </div>
+    <div class="screens">
+      <div class="screen"><small>Home, desktop</small><div class="frame desk" data-tpl="home" data-v="v3"></div></div>
+      <div class="screen"><small>/links, celular</small><div class="frame phone" data-tpl="links" data-v="v3"></div></div>
+    </div>
+  </section>
+</div>
+
+<template id="home">
+  <div class="site">
+    <div class="pad bar">
+      <a class="d" href="#">João Carvalho</a>
+      <ul><li><a href="#">Sobre</a></li><li><a href="#">Palestras</a></li><li><a href="#">Blog</a></li><li><a href="#">Links</a></li></ul>
+    </div>
+    <div class="pad hero">
+      <h1 class="d">Sou Head of Engineering na 42WP. Trabalho com WordPress para grandes empresas de mídia.</h1>
+      <p>Cuido de arquitetura, migrações e times em projetos de WordPress VIP. Também sou professor e palestro sobre o que aprendo nesses projetos.</p>
+      <div class="actions"><a class="btn" href="#">Convidar para palestrar</a><a class="u" href="#">Seguir no LinkedIn</a><a class="u" href="#">Ver todos os links</a></div>
+    </div>
+    <div class="pad">
+      <div class="block">
+        <h2 class="d">Palestras</h2>
+        <div class="talks">
+          <div>
+            <figure>Foto da palestra</figure>
+            <h3 class="d">WordPress headless: mitos e verdades</h3>
+            <p>WordCamp Brasil, 2025</p>
+            <a class="u" href="#">Ler o resumo</a>
+          </div>
+          <div>
+            <figure>Foto da palestra</figure>
+            <h3 class="d">Breaking News: CNN's Rise to Industry Leader in Brazil</h3>
+            <p>WordCamp US, 2024</p>
+            <a class="u" href="#">Assistir no YouTube</a>
+          </div>
+        </div>
+      </div>
+      <div class="block">
+        <h2 class="d">Antes</h2>
+        <p class="d past">CNN Brasil, Wikimedia Foundation, Earnest e Grupo Abril.</p>
+      </div>
+      <div class="block">
+        <h2 class="d">Código aberto</h2>
+        <div class="projects">
+          <div>
+            <h3 class="d">Tinta</h3>
+            <p>Wiki privada para equipes, dentro do WordPress.</p>
+            <a class="u" href="#">tinta.carvalho.cc</a>
+          </div>
+          <div>
+            <h3 class="d">restpress</h3>
+            <p>Plugin que gera a documentação da REST API do WordPress.</p>
+            <a class="u" href="#">restpress.org</a>
+          </div>
+        </div>
+      </div>
+      <div class="block">
+        <h2 class="d">Blog</h2>
+        <ul class="posts">
+          <li><a class="d" href="#">Mitos e verdades: resumo da minha palestra sobre WordPress headless</a><span>29 nov. 2025</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pad band">
+      <h2 class="d">Convites para palestras</h2>
+      <p>Falo sobre WordPress em grande escala, headless e engenharia para empresas de mídia. Para convites, escreva pelo LinkedIn.</p>
+      <a class="btn" href="#">Convidar para palestrar</a>
+    </div>
+    <div class="pad foot">
+      <span>João Carvalho, 2026</span>
+      <ul><li>LinkedIn</li><li>GitHub</li><li>YouTube</li><li>RSS</li></ul>
+    </div>
+  </div>
+</template>
+
+<template id="links">
+  <div class="site links">
+    <h1 class="d">João Carvalho</h1>
+    <p class="role">Head of Engineering na 42WP. Professor e palestrante.</p>
+    <a class="btn" href="#">Convidar para palestrar</a>
+    <ul>
+      <li><a href="#"><b class="d">LinkedIn</b><span>Onde publico com mais frequência</span></a></li>
+      <li><a href="#"><b class="d">YouTube</b><span>Aulas e palestras</span></a></li>
+      <li><a href="#"><b class="d">GitHub</b><span>Código aberto</span></a></li>
+      <li><a href="#"><b class="d">Blog</b><span>Textos sobre WordPress e engenharia</span></a></li>
+      <li><a href="#"><b class="d">Tinta</b><span>Wiki privada para equipes, dentro do WordPress</span></a></li>
+      <li><a href="#"><b class="d">restpress</b><span>Documentação da REST API do WordPress</span></a></li>
+    </ul>
+    <a class="home u" href="#">carvalho.cc</a>
+  </div>
+</template>
+
+<script>
+document.querySelectorAll('.frame[data-tpl]').forEach(function (frame) {
+  var site = document.getElementById(frame.dataset.tpl).content.firstElementChild.cloneNode(true);
+  site.classList.add(frame.dataset.v);
+  frame.appendChild(site);
+});
+</script>
+</body>
+</html>

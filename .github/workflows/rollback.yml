@@ -1,0 +1,35 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# ROLLBACK — Hostinger (re-pivot do symlink `current` pra um release anterior).
+# Manual (workflow_dispatch). Sem input `release` → volta pro release
+# imediatamente anterior ao ativo.
+# ─────────────────────────────────────────────────────────────────────────────
+name: Rollback (Hostinger)
+
+on:
+  workflow_dispatch:
+    inputs:
+      release:
+        description: "Release id para voltar (vazio = release anterior ao ativo)"
+        required: false
+        default: ""
+
+# Mesmo group do deploy → rollback e deploy nunca rodam ao mesmo tempo.
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  rollback:
+    name: Rollback (re-pivot 'current')
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/rollback-hostinger
+        with:
+          ssh-host: ${{ secrets.SSH_HOST }}
+          ssh-user: ${{ secrets.SSH_USER }}
+          ssh-password: ${{ secrets.SSH_PASSWORD }}
+          ssh-port: ${{ secrets.SSH_PORT || '65002' }}
+          target-release: ${{ inputs.release }}
+          site-url: ${{ vars.SITE_URL }}

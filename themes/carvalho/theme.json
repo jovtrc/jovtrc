@@ -1,0 +1,187 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/theme.json",
+    "version": 3,
+    "settings": {
+        "appearanceTools": true,
+        "useRootPaddingAwareAlignments": true,
+        "layout": {
+            "contentSize": "720px",
+            "wideSize": "1180px"
+        },
+        "color": {
+            "defaultPalette": false,
+            "defaultGradients": false,
+            "defaultDuotone": false,
+            "palette": [
+                { "slug": "base", "name": "Base", "color": "#173f2e" },
+                { "slug": "contrast", "name": "Contrast", "color": "#f3f0e4" },
+                { "slug": "muted", "name": "Muted", "color": "#b3ccbc" },
+                { "slug": "muted-inverse", "name": "Muted on contrast", "color": "#47695a" },
+                { "slug": "line", "name": "Line", "color": "#f3f0e43d" }
+            ]
+        },
+        "typography": {
+            "fluid": true,
+            "defaultFontSizes": false,
+            "fontFamilies": [
+                {
+                    "slug": "display",
+                    "name": "Archivo",
+                    "fontFamily": "Archivo, \"Arial Black\", \"Helvetica Neue\", Arial, sans-serif",
+                    "fontFace": [
+                        {
+                            "fontFamily": "Archivo",
+                            "fontStyle": "normal",
+                            "fontWeight": "100 900",
+                            "fontStretch": "62% 125%",
+                            "fontDisplay": "swap",
+                            "src": ["file:./assets/fonts/archivo-variable.woff2"]
+                        }
+                    ]
+                },
+                {
+                    "slug": "body",
+                    "name": "IBM Plex Sans",
+                    "fontFamily": "\"IBM Plex Sans\", \"Helvetica Neue\", Arial, sans-serif",
+                    "fontFace": [
+                        {
+                            "fontFamily": "IBM Plex Sans",
+                            "fontStyle": "normal",
+                            "fontWeight": "100 700",
+                            "fontDisplay": "swap",
+                            "src": ["file:./assets/fonts/ibm-plex-sans-variable.woff2"]
+                        },
+                        {
+                            "fontFamily": "IBM Plex Sans",
+                            "fontStyle": "italic",
+                            "fontWeight": "400",
+                            "fontDisplay": "swap",
+                            "src": ["file:./assets/fonts/ibm-plex-sans-italic-400.woff2"]
+                        }
+                    ]
+                }
+            ],
+            "fontSizes": [
+                { "slug": "small", "name": "Small", "size": "0.9375rem", "fluid": false },
+                { "slug": "base", "name": "Base", "size": "1.0625rem", "fluid": false },
+                { "slug": "medium", "name": "Medium", "size": "1.3125rem", "fluid": { "min": "1.125rem", "max": "1.3125rem" } },
+                { "slug": "large", "name": "Large", "size": "1.6875rem", "fluid": { "min": "1.375rem", "max": "1.6875rem" } },
+                { "slug": "x-large", "name": "Extra large", "size": "2.5rem", "fluid": { "min": "1.75rem", "max": "2.5rem" } },
+                { "slug": "xx-large", "name": "Huge", "size": "3.25rem", "fluid": { "min": "2.125rem", "max": "3.25rem" } },
+                { "slug": "hero", "name": "Hero", "size": "3.875rem", "fluid": { "min": "2.25rem", "max": "3.875rem" } }
+            ]
+        },
+        "spacing": {
+            "defaultSpacingSizes": false,
+            "units": ["px", "em", "rem", "%", "vw"],
+            "spacingSizes": [
+                { "slug": "10", "name": "1", "size": "0.5rem" },
+                { "slug": "20", "name": "2", "size": "1rem" },
+                { "slug": "30", "name": "3", "size": "1.75rem" },
+                { "slug": "40", "name": "4", "size": "2.5rem" },
+                { "slug": "50", "name": "5", "size": "clamp(2.5rem, 5vw, 3.5rem)" },
+                { "slug": "60", "name": "6", "size": "clamp(3.5rem, 8vw, 5.5rem)" }
+            ]
+        }
+    },
+    "styles": {
+        "color": {
+            "background": "var:preset|color|base",
+            "text": "var:preset|color|contrast"
+        },
+        "typography": {
+            "fontFamily": "var:preset|font-family|body",
+            "fontSize": "var:preset|font-size|base",
+            "lineHeight": "1.55"
+        },
+        "spacing": {
+            "blockGap": "1.25rem",
+            "padding": {
+                "top": "0",
+                "bottom": "0",
+                "left": "clamp(1.5rem, 6vw, 4.5rem)",
+                "right": "clamp(1.5rem, 6vw, 4.5rem)"
+            }
+        },
+        "elements": {
+            "heading": {
+                "typography": {
+                    "fontFamily": "var:preset|font-family|display",
+                    "fontWeight": "800",
+                    "letterSpacing": "-0.035em",
+                    "lineHeight": "1.08"
+                }
+            },
+            "h1": { "typography": { "fontSize": "var:preset|font-size|xx-large", "lineHeight": "1.02" } },
+            "h2": { "typography": { "fontSize": "1.4375rem", "letterSpacing": "-0.02em", "lineHeight": "1.2" } },
+            "h3": { "typography": { "fontSize": "var:preset|font-size|large", "lineHeight": "1.12" } },
+            "h4": { "typography": { "fontSize": "var:preset|font-size|medium" } },
+            "link": {
+                "color": { "text": "inherit" },
+                "typography": { "textDecoration": "underline" }
+            },
+            "button": {
+                "color": {
+                    "background": "var:preset|color|contrast",
+                    "text": "var:preset|color|base"
+                },
+                "border": { "radius": "4px", "width": "0" },
+                "typography": {
+                    "fontFamily": "var:preset|font-family|body",
+                    "fontSize": "1rem",
+                    "fontWeight": "600",
+                    "lineHeight": "1.25",
+                    "textDecoration": "none"
+                },
+                "spacing": {
+                    "padding": { "top": "1rem", "bottom": "1rem", "left": "1.5rem", "right": "1.5rem" }
+                }
+            }
+        },
+        "blocks": {
+            "core/site-title": {
+                "typography": {
+                    "fontFamily": "var:preset|font-family|display",
+                    "fontSize": "1.3125rem",
+                    "fontWeight": "800",
+                    "letterSpacing": "-0.02em",
+                    "lineHeight": "1.2"
+                },
+                "elements": {
+                    "link": { "typography": { "textDecoration": "none" } }
+                }
+            },
+            "core/navigation": {
+                "typography": { "fontSize": "1rem" },
+                "elements": {
+                    "link": { "typography": { "textDecoration": "none" } }
+                }
+            },
+            "core/post-title": {
+                "elements": {
+                    "link": { "typography": { "textDecoration": "none" } }
+                }
+            },
+            "core/image": {
+                "border": { "radius": "4px" }
+            },
+            "core/code": {
+                "typography": { "fontSize": "var:preset|font-size|small" },
+                "spacing": {
+                    "padding": { "top": "1rem", "bottom": "1rem", "left": "1.25rem", "right": "1.25rem" }
+                },
+                "border": { "radius": "4px", "width": "1px", "style": "solid", "color": "currentColor" }
+            },
+            "core/quote": {
+                "typography": { "fontSize": "var:preset|font-size|medium" },
+                "spacing": { "padding": { "left": "1.25rem" } },
+                "border": { "left": { "width": "3px", "style": "solid", "color": "currentColor" } }
+            }
+        }
+    },
+    "templateParts": [
+        { "name": "header", "title": "Header", "area": "header" },
+        { "name": "footer", "title": "Footer", "area": "footer" }
+    ],
+    "customTemplates": []
+}

@@ -1,0 +1,39 @@
+# Dependencies
+**/node_modules
+**/vendor
+
+# plugins/ holds only third-party plugins installed via composer → ignored.
+/plugins/*
+!/plugins/.gitkeep
+
+# Platform-managed
+/mu-plugins/
+/uploads/
+/upgrade/
+/object-cache.php
+/db.php
+
+# LiteSpeed Cache runtime state + drop-in
+/litespeed/
+/cache/
+/advanced-cache.php
+
+# Env secrets
+auth.json
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.idea/
+.vscode/
+
+# Local preview (caminhos absolutos desta máquina)
+.claude/
