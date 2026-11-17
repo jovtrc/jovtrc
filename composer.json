@@ -21,7 +21,8 @@
         "wp-plugin/litespeed-cache": "^7.9",
         "wp-plugin/tinta": "^0.1",
         "wp-plugin/two-factor": "^0.17.0",
-        "wp-plugin/autodescription": "^5.2"
+        "wp-plugin/autodescription": "^5.2",
+        "wp-plugin/google-site-kit": "^1.192"
     },
     "extra": {
         "installer-paths": {

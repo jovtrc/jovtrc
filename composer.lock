@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ec1d1bd7be0b5f1f2bc2e80adccc9a9c",
+    "content-hash": "8fba6db129cd1ce3c9954e061b851e31",
     "packages": [
         {
             "name": "composer/installers",
@@ -182,6 +182,37 @@
                 "source": "https://plugins.svn.wordpress.org/autodescription"
             },
             "time": "2026-11-10T21:17:31+00:00"
+        },
+        {
+            "name": "wp-plugin/google-site-kit",
+            "version": "1.192.0",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/google-site-kit/",
+                "reference": "tags/1.192.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/google-site-kit.1.192.0.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "Google"
+                }
+            ],
+            "description": "Site Kit is a one-stop solution for WordPress users to use everything Google has to offer to make them successful on the web.",
+            "homepage": "https://sitekit.withgoogle.com",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/google-site-kit/#developers",
+                "issues": "https://wordpress.org/support/plugin/google-site-kit",
+                "source": "https://plugins.svn.wordpress.org/google-site-kit"
+            },
+            "time": "2026-11-16T20:02:47+00:00"
         },
         {
             "name": "wp-plugin/litespeed-cache",
