@@ -10,7 +10,7 @@
 $carvalho_links = array(
     array(
         'name'  => 'LinkedIn',
-        'about' => __('Where I post most often', 'carvalho'),
+        'about' => '',
         'url'   => CARVALHO_LINKEDIN_URL,
     ),
     array(
@@ -54,11 +54,11 @@ $carvalho_links = array(
 <div class="wp-block-group" style="margin-top:var(--wp--preset--spacing--30)"><?php foreach ($carvalho_links as $carvalho_link) : ?><!-- wp:group {"className":"carvalho-link","style":{"spacing":{"blockGap":"0.125rem"}},"layout":{"type":"default"}} -->
 <div class="wp-block-group carvalho-link"><!-- wp:paragraph {"fontSize":"large","fontFamily":"display"} -->
 <p class="has-display-font-family has-large-font-size"><a href="<?php echo esc_url($carvalho_link['url']); ?>"><?php echo esc_html($carvalho_link['name']); ?></a></p>
-<!-- /wp:paragraph -->
+<!-- /wp:paragraph --><?php if ($carvalho_link['about']) : ?>
 
 <!-- wp:paragraph {"textColor":"muted","fontSize":"small"} -->
 <p class="has-muted-color has-text-color has-small-font-size"><?php echo esc_html($carvalho_link['about']); ?></p>
-<!-- /wp:paragraph --></div>
+<!-- /wp:paragraph --><?php endif; ?></div>
 <!-- /wp:group --><?php endforeach; ?></div>
 <!-- /wp:group -->
 

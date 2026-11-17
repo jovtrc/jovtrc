@@ -57,7 +57,6 @@ return array(
             => 'Falo sobre WordPress em grande escala, headless e engenharia para empresas de mídia, em português e em inglês. Para convidar, escreva pelo LinkedIn.',
 
         'Head of Engineering at 42WP. Teacher and speaker.' => 'Head of Engineering na 42WP. Professor e palestrante.',
-        'Where I post most often'                           => 'Onde publico com mais frequência',
         'Writing about WordPress and engineering'           => 'Textos sobre WordPress e engenharia',
 
         'Page not found'               => 'Página não encontrada',
