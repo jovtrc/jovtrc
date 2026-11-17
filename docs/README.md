@@ -51,5 +51,5 @@ gh workflow run setup.yml --ref carvalho-cc
 roda `content/setup.php` com o WP-CLI. Também fixa `LSWCP_TAG_PREFIX` no `wp-config.php`
 (sem isso, a limpeza do LiteSpeed não alcança o cache de releases anteriores) e esvazia o
 cache. Ativa os plugins do `composer.json` e desativa as cópias que o primeiro deploy renomeou
-para `*.pre-symlink.*`. Rode depois do primeiro deploy. Pode rodar
+para `*.pre-symlink.*` e depois apaga essas pastas. Rode depois do primeiro deploy. Pode rodar
 de novo: o que já existe não é recriado. O site local usa o mesmo arquivo.
