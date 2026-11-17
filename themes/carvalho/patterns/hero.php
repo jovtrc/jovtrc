@@ -20,12 +20,12 @@
 <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|30","margin":{"top":"var:preset|spacing|40"}}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
 <div class="wp-block-group" style="margin-top:var(--wp--preset--spacing--40)"><!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button -->
-<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#"><?php esc_html_e('Invite me to speak', 'carvalho'); ?></a></div>
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url(CARVALHO_LINKEDIN_URL); ?>"><?php esc_html_e('Invite me to speak', 'carvalho'); ?></a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons -->
 
 <!-- wp:paragraph -->
-<p><a href="#"><?php esc_html_e('Follow me on LinkedIn', 'carvalho'); ?></a></p>
+<p><a href="<?php echo esc_url(CARVALHO_LINKEDIN_URL); ?>"><?php esc_html_e('Follow me on LinkedIn', 'carvalho'); ?></a></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->

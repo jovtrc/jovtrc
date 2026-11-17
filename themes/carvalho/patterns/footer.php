@@ -10,9 +10,8 @@
  */
 
 $carvalho_menu = array(
-    'LinkedIn' => '#',
+    'LinkedIn' => CARVALHO_LINKEDIN_URL,
     'GitHub'   => 'https://github.com/jovtrc',
-    'YouTube'  => '#',
     'RSS'      => get_bloginfo('rss2_url'),
 );
 ?>

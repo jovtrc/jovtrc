@@ -9,6 +9,8 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+const CARVALHO_LINKEDIN_URL = 'https://www.linkedin.com/in/jovtrc/';
+
 /**
  * Carrega as traduções e aplica o style.css também no editor.
  */

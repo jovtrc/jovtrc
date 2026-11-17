@@ -58,7 +58,6 @@ return array(
 
         'Head of Engineering at 42WP. Teacher and speaker.' => 'Head of Engineering na 42WP. Professor e palestrante.',
         'Where I post most often'                           => 'Onde publico com mais frequência',
-        'Classes and talks'                                 => 'Aulas e palestras',
         'Writing about WordPress and engineering'           => 'Textos sobre WordPress e engenharia',
 
         'Page not found'               => 'Página não encontrada',

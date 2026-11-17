@@ -11,12 +11,7 @@ $carvalho_links = array(
     array(
         'name'  => 'LinkedIn',
         'about' => __('Where I post most often', 'carvalho'),
-        'url'   => '#',
-    ),
-    array(
-        'name'  => 'YouTube',
-        'about' => __('Classes and talks', 'carvalho'),
-        'url'   => '#',
+        'url'   => CARVALHO_LINKEDIN_URL,
     ),
     array(
         'name'  => 'GitHub',
@@ -51,7 +46,7 @@ $carvalho_links = array(
 
 <!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|30"}}}} -->
 <div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--30)"><!-- wp:button {"width":100} -->
-<div class="wp-block-button has-custom-width wp-block-button__width-100"><a class="wp-block-button__link wp-element-button" href="#"><?php esc_html_e('Invite me to speak', 'carvalho'); ?></a></div>
+<div class="wp-block-button has-custom-width wp-block-button__width-100"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url(CARVALHO_LINKEDIN_URL); ?>"><?php esc_html_e('Invite me to speak', 'carvalho'); ?></a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons -->
 

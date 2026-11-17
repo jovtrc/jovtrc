@@ -125,6 +125,7 @@ carvalho_setup_seo(array(
     'knowledge_type' => 'person',
     'knowledge_name' => 'João Carvalho',
     'knowledge_logo' => 0,
+    'knowledge_linkedin' => 'https://www.linkedin.com/in/jovtrc/',
     'ld_json_searchbox' => 0,
     'theme_color' => '#173f2e',
     'sitemap_logo' => 0,
