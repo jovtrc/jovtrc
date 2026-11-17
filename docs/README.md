@@ -19,8 +19,8 @@ Os plugins são declarados no `composer.json` e instalados com `composer install
 
 `push` na branch `carvalho-cc` (ou execução manual) dispara `.github/workflows/deploy.yml`:
 `composer install --no-dev` → envio como novo release em
-`~/domains/carvalho.cc/public_html/wp-content/_deployment_files/<id>/` → troca atômica do
-symlink `current` → limpeza do LiteSpeed Cache. Rollback manual em `.github/workflows/rollback.yml`.
+`~/domains/carvalho.cc/public_html/wp-content/_deployment_files/<id>/` → cópia de cada tema e
+plugin do release para `wp-content/` (rsync) → limpeza do LiteSpeed Cache. Rollback manual em `.github/workflows/rollback.yml`.
 
 Configure no repositório (Settings → Environments → `production`):
 
@@ -32,7 +32,7 @@ Configure no repositório (Settings → Environments → `production`):
 | Secret | `SSH_PORT` | porta SSH (opcional, default `65002` na Hostinger) |
 | Variable | `SITE_URL` | URL pública para o health check (opcional) |
 
-Diretórios enviados no deploy: `themes/` e `plugins/` (symlink por item, deixando
+Diretórios enviados no deploy: `themes/` e `plugins/` (cópia por item, deixando
 intactos o tema padrão e os plugins instalados pelo wp-admin). O que não vai para
 o servidor está no `.deployignore`.
 
@@ -50,6 +50,5 @@ gh workflow run setup.yml --ref carvalho-cc
 `.github/workflows/setup.yml` (execução manual) envia `content/` para o servidor e
 roda `content/setup.php` com o WP-CLI. Também fixa `LSWCP_TAG_PREFIX` no `wp-config.php`
 (sem isso, a limpeza do LiteSpeed não alcança o cache de releases anteriores) e esvazia o
-cache. Ativa os plugins do `composer.json` e desativa as cópias que o primeiro deploy renomeou
-para `*.pre-symlink.*` e depois apaga essas pastas. Rode depois do primeiro deploy. Pode rodar
+cache. Ativa os plugins do `composer.json`. Rode depois do primeiro deploy. Pode rodar
 de novo: o que já existe não é recriado. O site local usa o mesmo arquivo.

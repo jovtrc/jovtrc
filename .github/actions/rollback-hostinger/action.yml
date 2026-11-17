@@ -29,14 +29,13 @@ runs:
         sudo apt-get update -qq
         sudo apt-get install -y sshpass
 
-    - name: Resolve target and re-pivot 'current'
+    - name: Resolve target and reactivate it
       shell: bash
       env:
         SSHPASS: ${{ inputs.ssh-password }}
         WP_CONTENT_SUBPATH: domains/carvalho.cc/public_html/wp-content
         RELEASES_DIRNAME: _deployment_files
         PER_ITEM_DIRS: "themes plugins"
-        WHOLE_DIRS: ""
         KEEP_RELEASES: "3"
       run: |
         set -euo pipefail
@@ -68,7 +67,6 @@ runs:
           DEPLOY_RELEASES_DIRNAME='$RELEASES_DIRNAME' \
           DEPLOY_RELEASE_ID='$TARGET' \
           DEPLOY_PER_ITEM_DIRS='$PER_ITEM_DIRS' \
-          DEPLOY_WHOLE_DIRS='$WHOLE_DIRS' \
           DEPLOY_KEEP='$KEEP_RELEASES' \
           bash -s" < "${{ github.action_path }}/../deploy-hostinger/activate-release.sh"
 

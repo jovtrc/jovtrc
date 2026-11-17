@@ -10,9 +10,7 @@
 # do cache não alcança páginas guardadas em releases anteriores. Por isso o
 # setup termina esvaziando o cache inteiro.
 #
-# Por fim, ativa os plugins do composer.json. O setup.php desativa antes as
-# cópias que o primeiro deploy renomeou para *.pre-symlink.*, e o workflow as
-# apaga pelo sistema de arquivos (`wp plugin delete` rodaria o uninstall.php).
+# Por fim, ativa os plugins do composer.json.
 # Rode depois do primeiro deploy. Usa os mesmos secrets do `deploy.yml`.
 # ─────────────────────────────────────────────────────────────────────────────
 name: Setup (Hostinger)
@@ -72,7 +70,6 @@ jobs:
 
           PLUGINS="$(jq -r '.require | keys[] | select(startswith("wp-plugin/")) | ltrimstr("wp-plugin/")' composer.json | xargs)"
           $SSH "$REMOTE" "$WP_REMOTE plugin activate $PLUGINS" < .github/scripts/remote-wp.sh
-          $SSH "$REMOTE" "rm -rfv \"\$HOME/$WP_ROOT_SUBPATH/wp-content/plugins/\"*.pre-symlink.* | tail -n 2"
           $SSH "$REMOTE" "$WP_REMOTE plugin list --fields=name,status" < .github/scripts/remote-wp.sh
 
           $SSH "$REMOTE" "$WP_REMOTE eval 'LiteSpeed\\Core::cls()->proceed_action(\"empty_all\"); LiteSpeed\\Core::kick_purge_queue() || exit(1);'" < .github/scripts/remote-wp.sh \

@@ -1,5 +1,5 @@
 name: "Deploy to Hostinger"
-description: "Install plugins (Composer) and deploy to Hostinger via SSH with atomic symlink releases."
+description: "Install plugins (Composer) and deploy to Hostinger via SSH as stored releases."
 
 inputs:
   ssh-host:
@@ -39,7 +39,6 @@ runs:
       shell: bash
       env:
         PER_ITEM_DIRS: "themes plugins"
-        WHOLE_DIRS: ""
       run: |
         set -euo pipefail
         # Monta a lista de exclusão do rsync a partir do .deployignore (sem comentários,
@@ -47,7 +46,7 @@ runs:
         grep -vE '^\s*#' .deployignore | grep -vE '^\s*$' | grep -vE '^\s*!' > /tmp/rsync-exclude.txt
         printf '%s\n' ".git" ".github" ".deployignore" >> /tmp/rsync-exclude.txt
         rm -rf ../staging-deploy && mkdir -p ../staging-deploy
-        for d in $PER_ITEM_DIRS $WHOLE_DIRS; do
+        for d in $PER_ITEM_DIRS; do
           if [ -d "$d" ]; then
             rsync -a --exclude-from=/tmp/rsync-exclude.txt "$d" ../staging-deploy/
           else
@@ -66,14 +65,13 @@ runs:
         sudo apt-get update -qq
         sudo apt-get install -y sshpass
 
-    - name: Upload release and activate (atomic symlink pivot)
+    - name: Upload release and activate
       shell: bash
       env:
         SSHPASS: ${{ inputs.ssh-password }}
         WP_CONTENT_SUBPATH: domains/carvalho.cc/public_html/wp-content
         RELEASES_DIRNAME: _deployment_files
         PER_ITEM_DIRS: "themes plugins"
-        WHOLE_DIRS: ""
         KEEP_RELEASES: "3"
       run: |
         set -euo pipefail
@@ -100,15 +98,14 @@ runs:
           LINKDEST="--link-dest=$REMOTE_WP_CONTENT/$RELEASES_DIRNAME/current/"
         fi
         rsync -az --delete $LINKDEST -e "$SSH" ../staging-deploy/ "$REMOTE:$RELEASE_PATH/"
-        echo "✅ Upload done — live site untouched until the symlink swap."
+        echo "✅ Upload done — live site untouched until activation."
 
-        echo "🔁 Activating release (atomic 'current' pivot)…"
+        echo "🔁 Activating release…"
         $SSH "$REMOTE" "\
           DEPLOY_WP_CONTENT='$REMOTE_WP_CONTENT' \
           DEPLOY_RELEASES_DIRNAME='$RELEASES_DIRNAME' \
           DEPLOY_RELEASE_ID='$RELEASE_ID' \
           DEPLOY_PER_ITEM_DIRS='$PER_ITEM_DIRS' \
-          DEPLOY_WHOLE_DIRS='$WHOLE_DIRS' \
           DEPLOY_KEEP='$KEEP_RELEASES' \
           bash -s" < "${{ github.action_path }}/activate-release.sh"
 

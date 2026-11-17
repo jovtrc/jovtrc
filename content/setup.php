@@ -27,21 +27,6 @@ function carvalho_setup_content(string $type, string $slug, array $fields): int
 }
 
 /**
- * Desativa as cópias de plugins que o primeiro deploy renomeou para *.pre-symlink.*.
- * As cópias do repositório são ativadas depois, em outro processo, para que as duas não carreguem juntas.
- */
-function carvalho_setup_deactivate_replaced_plugins(): void
-{
-    require_once ABSPATH . 'wp-admin/includes/plugin.php';
-
-    $replaced = array_filter(
-        (array) get_option('active_plugins', array()),
-        fn(string $plugin): bool => str_contains(dirname($plugin), '.pre-symlink.')
-    );
-    deactivate_plugins($replaced);
-}
-
-/**
  * Troca o slug de um post e atualiza os links internos que apontam para ele.
  * O WordPress guarda o slug antigo e redireciona o endereço antigo para o novo.
  */
@@ -76,7 +61,6 @@ function carvalho_setup_trash_sample_post(): void
     }
 }
 
-carvalho_setup_deactivate_replaced_plugins();
 switch_theme('carvalho');
 
 update_option('blogname', 'João Carvalho');

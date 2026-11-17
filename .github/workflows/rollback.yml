@@ -1,5 +1,5 @@
 # ─────────────────────────────────────────────────────────────────────────────
-# ROLLBACK — Hostinger (re-pivot do symlink `current` pra um release anterior).
+# ROLLBACK — Hostinger (reativa um release anterior guardado no servidor).
 # Manual (workflow_dispatch). Sem input `release` → volta pro release
 # imediatamente anterior ao ativo.
 # ─────────────────────────────────────────────────────────────────────────────
@@ -28,7 +28,7 @@ concurrency:
 
 jobs:
   rollback:
-    name: Rollback (re-pivot 'current')
+    name: Rollback (reativa release anterior)
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     environment: production

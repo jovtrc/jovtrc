@@ -1,10 +1,11 @@
 # ─────────────────────────────────────────────────────────────────────────────
-# DEPLOY — Hostinger via SSH (releases atômicos por symlink).
+# DEPLOY — Hostinger via SSH (releases guardados em _deployment_files).
 #
 # A cada push na branch de deploy (abaixo) os plugins são instalados pelo
 # Composer e o site é enviado como um novo release em
-# ~/domains/carvalho.cc/public_html/wp-content/_deployment_files/<id>/; a troca
-# do symlink `current` publica tudo de uma vez. Rollback: `rollback.yml`.
+# ~/domains/carvalho.cc/public_html/wp-content/_deployment_files/<id>/. A
+# ativação copia cada tema e plugin do release para wp-content/ e aponta o
+# symlink `current` para ele. Rollback: `rollback.yml`.
 #
 # Secrets (Environment `production`): SSH_HOST / SSH_USER / SSH_PASSWORD e,
 # opcionalmente, SSH_PORT (a Hostinger costuma usar 65002). Variável opcional
