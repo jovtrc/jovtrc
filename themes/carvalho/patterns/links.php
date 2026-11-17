@@ -43,7 +43,7 @@ $carvalho_links = array(
 <!-- wp:paragraph {"textColor":"muted"} -->
 <p class="has-muted-color has-text-color"><?php
 /* translators: %s: link to 42WP. */
-printf(esc_html__('Co-founder of %s. Teacher and speaker.', 'carvalho'), '<a href="' . esc_url(CARVALHO_42WP_URL) . '">42WP</a>');
+printf(esc_html__('Co-founder and Head of Engineering at %s. Teacher and speaker.', 'carvalho'), '<a href="' . esc_url(CARVALHO_42WP_URL) . '">42WP</a>');
 ?></p>
 <!-- /wp:paragraph -->
 

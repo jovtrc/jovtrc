@@ -58,7 +58,7 @@ return array(
         'I speak about WordPress at scale, headless and engineering for media companies, in Portuguese and in English. To invite me, write to me on LinkedIn.'
             => 'Falo sobre WordPress em grande escala, headless e engenharia para empresas de mídia, em português e em inglês. Para convidar, escreva pelo LinkedIn.',
 
-        'Co-founder of %s. Teacher and speaker.' => 'Cofundador da %s. Professor e palestrante.',
+        'Co-founder and Head of Engineering at %s. Teacher and speaker.' => 'Cofundador e Head of Engineering da %s. Professor e palestrante.',
         'Writing about WordPress and engineering'           => 'Textos sobre WordPress e engenharia',
 
         'Page not found'               => 'Página não encontrada',
