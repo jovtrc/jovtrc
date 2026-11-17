@@ -49,6 +49,15 @@ function carvalho_setup_rename_post(string $old_slug, string $new_slug): void
 }
 
 /**
+ * Aplica a configuração do The SEO Framework sobre a que já existe.
+ */
+function carvalho_setup_seo(array $settings): void
+{
+    $current = (array) get_option('autodescription-site-settings', array());
+    update_option('autodescription-site-settings', array_merge($current, $settings));
+}
+
+/**
  * Envia para a lixeira o post de exemplo criado na instalação do WordPress.
  */
 function carvalho_setup_trash_sample_post(): void
@@ -97,6 +106,31 @@ foreach ($carvalho_posts as $carvalho_slug => $carvalho_fields) {
 }
 
 carvalho_setup_trash_sample_post();
+
+$carvalho_social_image = add_query_arg(
+    'ver',
+    substr(md5_file(get_theme_file_path('assets/images/talks/wordcamp-us-2024.jpg')), 0, 8),
+    get_theme_file_uri('assets/images/talks/wordcamp-us-2024.jpg')
+);
+carvalho_setup_seo(array(
+    'title_separator' => 'ndash',
+    'homepage_title' => 'João Carvalho',
+    'homepage_tagline' => 1,
+    'homepage_title_tagline' => 'Head of Engineering da 42WP',
+    'homepage_description' => 'Head of Engineering da 42WP. Lidero arquitetura, migrações e times de projetos em WordPress VIP para grandes empresas de mídia. Professor e palestrante.',
+    'homepage_social_image_url' => $carvalho_social_image,
+    'social_image_fb_url' => $carvalho_social_image,
+    'author_noindex' => 1,
+    'knowledge_output' => 1,
+    'knowledge_type' => 'person',
+    'knowledge_name' => 'João Carvalho',
+    'knowledge_logo' => 0,
+    'ld_json_searchbox' => 0,
+    'theme_color' => '#173f2e',
+    'sitemap_logo' => 0,
+    'sitemap_color_main' => '173f2e',
+    'sitemap_color_accent' => '47695a',
+));
 
 global $wp_rewrite;
 $wp_rewrite->set_permalink_structure('/blog/%postname%/');
