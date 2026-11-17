@@ -10,7 +10,7 @@
 $carvalho_links = array(
     array(
         'name'  => 'LinkedIn',
-        'about' => '',
+        'about' => __('Professional profile and contact', 'carvalho'),
         'url'   => CARVALHO_LINKEDIN_URL,
     ),
     array(

@@ -46,6 +46,8 @@ return array(
         'Before'                                                    => 'Antes',
         'CNN Brasil, Wikimedia Foundation, Earnest and Grupo Abril.' => 'CNN Brasil, Wikimedia Foundation, Earnest e Grupo Abril.',
 
+        'Professional profile and contact' => 'Perfil profissional e contato',
+
         'Open source'                                                   => 'Código aberto',
         'A private wiki for teams, inside WordPress.'                   => 'Wiki privada para equipes, dentro do WordPress.',
         'A plugin that generates the WordPress REST API documentation.' => 'Plugin que gera a documentação da REST API do WordPress.',
