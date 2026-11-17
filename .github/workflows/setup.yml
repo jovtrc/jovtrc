@@ -10,6 +10,14 @@ name: Setup (Hostinger)
 
 on:
   workflow_dispatch:
+  # A branch do site não é a padrão do repositório, e o GitHub só registra um
+  # workflow manual fora da branch padrão depois de uma execução. Um push que
+  # altere este arquivo cria essa execução; o job é pulado.
+  push:
+    branches:
+      - carvalho-cc
+    paths:
+      - .github/workflows/setup.yml
 
 # Mesmo group do deploy → setup e deploy nunca rodam ao mesmo tempo.
 concurrency:
@@ -19,6 +27,7 @@ concurrency:
 jobs:
   setup:
     name: Setup (wp eval-file)
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     environment: production
     steps:

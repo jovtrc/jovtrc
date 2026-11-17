@@ -36,6 +36,15 @@ Diretórios enviados no deploy: `themes/` e `plugins/` (symlink por item, deixan
 intactos o tema padrão e os plugins instalados pelo wp-admin). O que não vai para
 o servidor está no `.deployignore`.
 
+Execução manual, pela linha de comando (a branch do site não é a padrão do
+repositório, então o botão "Run workflow" não aparece no GitHub):
+
+```bash
+gh workflow run deploy.yml --ref carvalho-cc
+gh workflow run rollback.yml --ref carvalho-cc
+gh workflow run setup.yml --ref carvalho-cc
+```
+
 ## Setup
 
 `.github/workflows/setup.yml` (execução manual) envia `content/` para o servidor e
