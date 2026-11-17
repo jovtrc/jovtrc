@@ -40,7 +40,7 @@ $carvalho_talks = array(
 <div class="wp-block-column"><!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|40","left":"var:preset|spacing|40"}}}} -->
 <div class="wp-block-columns"><?php foreach ($carvalho_talks as $carvalho_talk) : ?><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:image {"aspectRatio":"16/9","scale":"cover","sizeSlug":"full","linkDestination":"none"} -->
-<figure class="wp-block-image size-full"><img src="<?php echo esc_url(get_theme_file_uri('assets/images/talks/' . $carvalho_talk['photo'])); ?>" alt="<?php echo esc_attr($carvalho_talk['alt']); ?>" width="1280" height="720" loading="lazy" style="aspect-ratio:16/9;object-fit:cover"/></figure>
+<figure class="wp-block-image size-full"><img src="<?php echo esc_url(carvalho_asset_url('assets/images/talks/' . $carvalho_talk['photo'])); ?>" alt="<?php echo esc_attr($carvalho_talk['alt']); ?>" width="1280" height="720" loading="lazy" style="aspect-ratio:16/9;object-fit:cover"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:heading {"level":3} -->
