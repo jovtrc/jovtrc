@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "daeffe80434c336e7783b4c4256a2bbe",
+    "content-hash": "ec1d1bd7be0b5f1f2bc2e80adccc9a9c",
     "packages": [
         {
             "name": "composer/installers",
@@ -153,6 +153,37 @@
             "time": "2024-06-24T20:46:46+00:00"
         },
         {
+            "name": "wp-plugin/autodescription",
+            "version": "5.2.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/autodescription/",
+                "reference": "tags/5.2.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/autodescription.5.2.1.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "Sybre Waaijer"
+                }
+            ],
+            "description": "The fastest feature-complete SEO plugin for professional WordPress websites. Secure, fast, unbranded, and automated SEO. Do less; get better results.",
+            "homepage": "https://theseoframework.com/",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/autodescription/#developers",
+                "issues": "https://wordpress.org/support/plugin/autodescription",
+                "source": "https://plugins.svn.wordpress.org/autodescription"
+            },
+            "time": "2026-11-10T21:17:31+00:00"
+        },
+        {
             "name": "wp-plugin/litespeed-cache",
             "version": "7.9.3",
             "source": {
@@ -212,6 +243,37 @@
                 "source": "https://plugins.svn.wordpress.org/tinta"
             },
             "time": "2026-11-10T18:11:46+00:00"
+        },
+        {
+            "name": "wp-plugin/two-factor",
+            "version": "0.17.0",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/two-factor/",
+                "reference": "tags/0.17.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/two-factor.0.17.0.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "WordPress.org"
+                }
+            ],
+            "description": "Enable Two-Factor Authentication (2FA) using time-based one-time passwords (TOTP), email, and backup verification codes.",
+            "homepage": "https://wordpress.org/plugins/two-factor/",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/two-factor/#developers",
+                "issues": "https://wordpress.org/support/plugin/two-factor",
+                "source": "https://plugins.svn.wordpress.org/two-factor"
+            },
+            "time": "2026-09-29T13:03:58+00:00"
         }
     ],
     "packages-dev": [],

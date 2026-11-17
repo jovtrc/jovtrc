@@ -19,7 +19,9 @@
     "require": {
         "php": "^8.3",
         "wp-plugin/litespeed-cache": "^7.9",
-        "wp-plugin/tinta": "^0.1"
+        "wp-plugin/tinta": "^0.1",
+        "wp-plugin/two-factor": "^0.17.0",
+        "wp-plugin/autodescription": "^5.2"
     },
     "extra": {
         "installer-paths": {
