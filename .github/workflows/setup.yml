@@ -52,7 +52,11 @@ jobs:
           [ -n "$SETUP_DIR" ] || { echo "::error::Não foi possível criar o diretório temporário no host remoto."; exit 1; }
           rsync -az -e "$SSH" content/ "$REMOTE:$SETUP_DIR/"
 
-          $SSH "$REMOTE" "cd \"\$HOME/$WP_ROOT_SUBPATH\" && wp eval-file '$SETUP_DIR/setup.php'; status=\$?; rm -rf '$SETUP_DIR'; exit \$status"
+          WP_REMOTE="DEPLOY_WP_ROOT=\"\$HOME/$WP_ROOT_SUBPATH\" bash -s --"
+          status=0
+          $SSH "$REMOTE" "$WP_REMOTE eval-file '$SETUP_DIR/setup.php'" < .github/scripts/remote-wp.sh || status=$?
+          $SSH "$REMOTE" "rm -rf '$SETUP_DIR'"
+          [ "$status" -eq 0 ] || exit "$status"
           echo "✅ Setup aplicado."
 
-          $SSH "$REMOTE" "cd \"\$HOME/$WP_ROOT_SUBPATH\" && wp litespeed-purge all" || echo "::warning::Não foi possível limpar o cache do LiteSpeed."
+          $SSH "$REMOTE" "$WP_REMOTE litespeed-purge all" < .github/scripts/remote-wp.sh || echo "::warning::Não foi possível limpar o cache do LiteSpeed."
