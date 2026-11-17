@@ -12,12 +12,12 @@
 <section class="wp-block-group alignwide" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:heading {"level":1,"className":"carvalho-headline","fontSize":"hero"} -->
 <h1 class="wp-block-heading carvalho-headline has-hero-font-size"><?php
 /* translators: %s: link to 42WP. */
-printf(esc_html__('I co-founded %s and lead its engineering. I build WordPress for large media companies.', 'carvalho'), '<a href="' . esc_url(CARVALHO_42WP_URL) . '">42WP</a>');
+printf(esc_html__('I lead engineering at %s. I build WordPress for large media companies.', 'carvalho'), '<a href="' . esc_url(CARVALHO_42WP_URL) . '">42WP</a>');
 ?></h1>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"className":"carvalho-measure","textColor":"muted","fontSize":"medium"} -->
-<p class="carvalho-measure has-muted-color has-text-color has-medium-font-size"><?php esc_html_e('I’m responsible for architecture, migrations and teams on WordPress VIP projects. I’m also a teacher and a speaker.', 'carvalho'); ?></p>
+<p class="carvalho-measure has-muted-color has-text-color has-medium-font-size"><?php esc_html_e('I co-founded the company. I’m responsible for architecture, migrations and teams on WordPress VIP projects. I’m also a teacher and a speaker.', 'carvalho'); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|30","margin":{"top":"var:preset|spacing|40"}}},"layout":{"type":"flex","flexWrap":"wrap"}} -->

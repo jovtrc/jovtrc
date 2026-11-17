@@ -24,10 +24,10 @@ return array(
         'About' => 'Sobre',
         'Talks' => 'Palestras',
 
-        'I co-founded %s and lead its engineering. I build WordPress for large media companies.'
-            => 'Cofundei a %s e lidero a engenharia. Faço WordPress para grandes empresas de mídia.',
-        'I’m responsible for architecture, migrations and teams on WordPress VIP projects. I’m also a teacher and a speaker.'
-            => 'Respondo pela arquitetura, pelas migrações e pelos times de projetos em WordPress VIP. Também sou professor e palestrante.',
+        'I lead engineering at %s. I build WordPress for large media companies.'
+            => 'Lidero a engenharia da %s. Faço WordPress para grandes empresas de mídia.',
+        'I co-founded the company. I’m responsible for architecture, migrations and teams on WordPress VIP projects. I’m also a teacher and a speaker.'
+            => 'Sou cofundador da empresa. Respondo pela arquitetura, pelas migrações e pelos times de projetos em WordPress VIP. Também sou professor e palestrante.',
         'Invite me to speak'    => 'Convidar para palestrar',
         'Follow me on LinkedIn' => 'Seguir no LinkedIn',
         'See all links'         => 'Ver todos os links',
