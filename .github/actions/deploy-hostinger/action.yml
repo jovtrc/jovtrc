@@ -112,6 +112,11 @@ runs:
           DEPLOY_KEEP='$KEEP_RELEASES' \
           bash -s" < "${{ github.action_path }}/activate-release.sh"
 
+        echo "🧹 Purging LiteSpeed Cache…"
+        $SSH "$REMOTE" "DEPLOY_WP_ROOT='$(dirname "$REMOTE_WP_CONTENT")' bash -s -- litespeed-purge all" \
+          < "${{ github.action_path }}/../../scripts/remote-wp.sh" \
+          || echo "::warning::Não foi possível limpar o cache do LiteSpeed."
+
     - name: Health check
       if: ${{ inputs.site-url != '' }}
       shell: bash

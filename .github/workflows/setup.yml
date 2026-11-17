@@ -4,6 +4,11 @@
 # Envia `content/` para um diretório temporário e roda `content/setup.php` com
 # o WP-CLI: ativa o tema, cria as páginas e os posts e define os links
 # permanentes. Pode rodar mais de uma vez; o que já existe não é recriado.
+#
+# Também fixa no wp-config.php o prefixo das tags do LiteSpeed Cache. Sem ele,
+# o prefixo vem do caminho real do plugin, que muda a cada release, e a limpeza
+# do cache não alcança páginas guardadas em releases anteriores. Por isso o
+# setup termina esvaziando o cache inteiro.
 # Rode depois do primeiro deploy. Usa os mesmos secrets do `deploy.yml`.
 # ─────────────────────────────────────────────────────────────────────────────
 name: Setup (Hostinger)
@@ -53,10 +58,14 @@ jobs:
           rsync -az -e "$SSH" content/ "$REMOTE:$SETUP_DIR/"
 
           WP_REMOTE="DEPLOY_WP_ROOT=\"\$HOME/$WP_ROOT_SUBPATH\" bash -s --"
+          $SSH "$REMOTE" "$WP_REMOTE config set LSWCP_TAG_PREFIX crv --type=constant" < .github/scripts/remote-wp.sh
+
           status=0
           $SSH "$REMOTE" "$WP_REMOTE eval-file '$SETUP_DIR/setup.php'" < .github/scripts/remote-wp.sh || status=$?
           $SSH "$REMOTE" "rm -rf '$SETUP_DIR'"
           [ "$status" -eq 0 ] || exit "$status"
           echo "✅ Setup aplicado."
 
-          $SSH "$REMOTE" "$WP_REMOTE litespeed-purge all" < .github/scripts/remote-wp.sh || echo "::warning::Não foi possível limpar o cache do LiteSpeed."
+          $SSH "$REMOTE" "$WP_REMOTE eval 'LiteSpeed\\Core::cls()->proceed_action(\"empty_all\"); LiteSpeed\\Core::kick_purge_queue() || exit(1);'" < .github/scripts/remote-wp.sh \
+            && echo "✅ Cache do LiteSpeed esvaziado." \
+            || echo "::warning::Não foi possível esvaziar o cache do LiteSpeed."

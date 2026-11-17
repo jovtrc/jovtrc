@@ -20,7 +20,7 @@ Os plugins são declarados no `composer.json` e instalados com `composer install
 `push` na branch `carvalho-cc` (ou execução manual) dispara `.github/workflows/deploy.yml`:
 `composer install --no-dev` → envio como novo release em
 `~/domains/carvalho.cc/public_html/wp-content/_deployment_files/<id>/` → troca atômica do
-symlink `current`. Rollback manual em `.github/workflows/rollback.yml`.
+symlink `current` → limpeza do LiteSpeed Cache. Rollback manual em `.github/workflows/rollback.yml`.
 
 Configure no repositório (Settings → Environments → `production`):
 
@@ -48,5 +48,7 @@ gh workflow run setup.yml --ref carvalho-cc
 ## Setup
 
 `.github/workflows/setup.yml` (execução manual) envia `content/` para o servidor e
-roda `content/setup.php` com o WP-CLI. Rode depois do primeiro deploy. Pode rodar
+roda `content/setup.php` com o WP-CLI. Também fixa `LSWCP_TAG_PREFIX` no `wp-config.php`
+(sem isso, a limpeza do LiteSpeed não alcança o cache de releases anteriores) e esvazia o
+cache. Rode depois do primeiro deploy. Pode rodar
 de novo: o que já existe não é recriado. O site local usa o mesmo arquivo.
