@@ -39,7 +39,7 @@ return array(
         'The architecture and team culture decisions that made CNN Brasil one of the three largest news sites in Brazil.'
             => 'As decisões de arquitetura e de cultura de time que levaram a CNN Brasil ao grupo dos três maiores portais de notícias do país.',
         'Watch the talk' => 'Assistir à palestra',
-        'João Carvalho on stage at WordCamp Brasil 2025, next to a slide about the tech stack' => 'João Carvalho no palco do WordCamp Brasil 2025, ao lado de um slide sobre a stack de tecnologia',
+        'João Carvalho on stage at WordCamp Brasil 2025' => 'João Carvalho no palco do WordCamp Brasil 2025',
         'João Carvalho on stage at WordCamp US 2024, in Portland' => 'João Carvalho no palco do WordCamp US 2024, em Portland',
         'Read the recap' => 'Ler o resumo',
 
