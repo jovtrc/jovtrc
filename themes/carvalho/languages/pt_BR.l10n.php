@@ -26,8 +26,8 @@ return array(
 
         'I lead engineering at 42WP. I build WordPress for large media companies.'
             => 'Lidero a engenharia da 42WP. Faço WordPress para grandes empresas de mídia.',
-        'As Head of Engineering, I’m responsible for architecture, migrations and teams on WordPress VIP projects. I’m also a teacher and a speaker.'
-            => 'Como Head of Engineering, respondo pela arquitetura, pelas migrações e pelos times de projetos em WordPress VIP. Também sou professor e palestrante.',
+        'I’m a co-founder of %s and, as Head of Engineering, I’m responsible for architecture, migrations and teams on WordPress VIP projects. I’m also a teacher and a speaker.'
+            => 'Sou cofundador da %s e, como Head of Engineering, respondo pela arquitetura, pelas migrações e pelos times de projetos em WordPress VIP. Também sou professor e palestrante.',
         'Invite me to speak'    => 'Convidar para palestrar',
         'Follow me on LinkedIn' => 'Seguir no LinkedIn',
         'See all links'         => 'Ver todos os links',
@@ -58,7 +58,7 @@ return array(
         'I speak about WordPress at scale, headless and engineering for media companies, in Portuguese and in English. To invite me, write to me on LinkedIn.'
             => 'Falo sobre WordPress em grande escala, headless e engenharia para empresas de mídia, em português e em inglês. Para convidar, escreva pelo LinkedIn.',
 
-        'Head of Engineering at 42WP. Teacher and speaker.' => 'Head of Engineering na 42WP. Professor e palestrante.',
+        'Co-founder and Head of Engineering at %s. Teacher and speaker.' => 'Cofundador e Head of Engineering da %s. Professor e palestrante.',
         'Writing about WordPress and engineering'           => 'Textos sobre WordPress e engenharia',
 
         'Page not found'               => 'Página não encontrada',

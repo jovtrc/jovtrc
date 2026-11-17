@@ -14,7 +14,10 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"className":"carvalho-measure","textColor":"muted","fontSize":"medium"} -->
-<p class="carvalho-measure has-muted-color has-text-color has-medium-font-size"><?php esc_html_e('As Head of Engineering, I’m responsible for architecture, migrations and teams on WordPress VIP projects. I’m also a teacher and a speaker.', 'carvalho'); ?></p>
+<p class="carvalho-measure has-muted-color has-text-color has-medium-font-size"><?php
+/* translators: %s: link to 42WP. */
+printf(esc_html__('I’m a co-founder of %s and, as Head of Engineering, I’m responsible for architecture, migrations and teams on WordPress VIP projects. I’m also a teacher and a speaker.', 'carvalho'), '<a href="' . esc_url(CARVALHO_42WP_URL) . '">42WP</a>');
+?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|30","margin":{"top":"var:preset|spacing|40"}}},"layout":{"type":"flex","flexWrap":"wrap"}} -->

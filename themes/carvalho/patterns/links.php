@@ -41,7 +41,10 @@ $carvalho_links = array(
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"textColor":"muted"} -->
-<p class="has-muted-color has-text-color"><?php esc_html_e('Head of Engineering at 42WP. Teacher and speaker.', 'carvalho'); ?></p>
+<p class="has-muted-color has-text-color"><?php
+/* translators: %s: link to 42WP. */
+printf(esc_html__('Co-founder and Head of Engineering at %s. Teacher and speaker.', 'carvalho'), '<a href="' . esc_url(CARVALHO_42WP_URL) . '">42WP</a>');
+?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|30"}}}} -->

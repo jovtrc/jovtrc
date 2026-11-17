@@ -10,6 +10,7 @@ if (!defined('ABSPATH')) {
 }
 
 const CARVALHO_LINKEDIN_URL = 'https://www.linkedin.com/in/jovtrc/';
+const CARVALHO_42WP_URL = 'https://42wp.cloud/';
 
 /**
  * Carrega as traduções e aplica o style.css também no editor.
